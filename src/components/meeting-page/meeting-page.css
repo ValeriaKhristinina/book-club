@@ -25,3 +25,26 @@
 
   color: var(--grey-color);
 }
+
+.participants-form__participant {
+  padding: 4px 0;
+  margin-bottom: 8px;
+}
+
+.participants-form__participant:last-child {
+  margin-bottom: 24px;
+}
+
+.participants-form__participant input {
+  margin-right: 8px;
+}
+
+.participants-form__participant label {
+  font-size: 24px;
+}
+
+
+.next-meeting-block div.plus {
+  font-size: 34px;
+  cursor: pointer;
+}

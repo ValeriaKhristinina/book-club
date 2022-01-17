@@ -3,7 +3,7 @@ import { Participant } from "./types/participant";
 export enum AppRoute {
   Root = '/',
   NewMeeting = '/new-meeting',
-  NextMeeting = '/next-meeting',
+  Meeting = '/meeting',
   Book = '/book/:id'
 }
 

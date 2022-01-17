@@ -14,7 +14,28 @@ p,h1, h2, h3 {
   margin: 0;
 }
 
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
 .container {
   max-width: 1280px;
   margin: 0 auto;
+}
+
+.btn {
+  font-size: 24px;
+  padding: 20px 16px;
+  margin-bottom: 16px;
+  background-color: inherit;
+  border: 1px solid var(--grey-color);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--grey-color);
+  color: white;
 }

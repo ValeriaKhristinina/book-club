@@ -12,7 +12,7 @@ function MainPage(): JSX.Element {
         <section className="main-content__block">
           <h3 className="main-content__title">Next meeting:</h3>
           <div>
-            <Link to={AppRoute.NextMeeting}><time>DATE</time></Link>
+            <Link to={AppRoute.Meeting}><time>DATE</time></Link>
           </div>
         </section>
         <section className="main-content__block">
