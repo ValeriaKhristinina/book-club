@@ -6,6 +6,14 @@
   border-bottom: 1px solid var(--grey-color);
 }
 
+.header a {
+  text-decoration: none;
+}
+
+.header a:visited {
+  color: black;
+}
+
 .header__title{
   font-size: 32px;
   font-weight: 500;
