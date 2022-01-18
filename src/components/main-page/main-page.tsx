@@ -1,11 +1,15 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, choosingPerson, newQueque } from '../../const';
 import './main-page.css';
 import Rating from '../rating/rating';
+import { useState } from 'react';
 
 function MainPage(): JSX.Element {
+  const [isActive, setActive] = useState(false)
+  const clickActiveHandler = () => isActive ? setActive(false) : setActive(true)
 
   return (
+
     <section className="main-page">
 
       <section className="main-content container">
@@ -21,7 +25,16 @@ function MainPage(): JSX.Element {
         </section>
         <section className="main-content__block main-content__block--all-width">
           <h3 className="main-content__title">Who choose next book :</h3>
-          <div>NAME</div>
+          <div className="main-content__subtitle">{choosingPerson.firstName} {choosingPerson.lastName}</div>
+          <div onClick={clickActiveHandler} className="link-see-all">{!isActive ? '+ See all list' : '- See less'}</div>
+          {isActive && (
+            <ul className="queque-list">
+              {newQueque.map(person => (
+                <li className="queque-list__item" key={person}>{person}</li>
+              ))}
+            </ul>
+          )
+          }
         </section>
         <section className="main-content__block">
           <h3 className="main-content__title">Last discussed book:</h3>

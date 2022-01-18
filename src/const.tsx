@@ -1,4 +1,5 @@
 import { Participant } from "./types/participant";
+import { createNewQueque, createPersonsArray } from "./utils/utils";
 
 export enum AppRoute {
   Root = '/',
@@ -49,3 +50,9 @@ export const PARTICIPANTS: Participant[] = [
     countOfMeeting: 8,
   },
 ]
+
+export const personsArray = createPersonsArray(PARTICIPANTS);
+
+export const choosingPerson = PARTICIPANTS[4]
+
+export const newQueque = createNewQueque(choosingPerson, personsArray);
