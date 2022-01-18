@@ -3,6 +3,4 @@ export type Participant = {
   firstName: string,
   lastName: string,
   joinDate: string,
-  countOfChoosingBook: number,
-  countOfMeeting: number,
 }
