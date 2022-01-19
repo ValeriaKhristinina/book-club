@@ -7,14 +7,19 @@ import Header from '../header/header';
 import MainPage from '../main-page/main-page'
 import NewMeetingPage from '../new-meeting-page/new-meeting-page';
 import MeetingPage from '../meeting-page/meeting-page';
-import { fetchMeetings, fetchParticipants } from '../../services/api';
+import ParticipantPage from '../participant-page/participant-page';
+import { useDispatch } from 'react-redux';
+import { getMeetingsAsync } from '../../store/meetings';
+import { getParticipantsAsync } from '../../store/participants';
+
 
 
 function App(): JSX.Element {
+  const dispatch = useDispatch();
   useEffect(() => {
-    fetchMeetings();
-    fetchParticipants();
-  }, []);
+    dispatch(getMeetingsAsync())
+    dispatch(getParticipantsAsync())
+  }, [dispatch]);
   return (
     <>
       <Header />
@@ -22,6 +27,7 @@ function App(): JSX.Element {
         <Route path={AppRoute.Root} element={<MainPage />} ></Route>
         <Route path={AppRoute.NewMeeting} element={<NewMeetingPage />} ></Route>
         <Route path={AppRoute.Meeting} element={<MeetingPage />} ></Route>
+        <Route path={AppRoute.Participant} element={<ParticipantPage />} ></Route>
       </Routes >
     </>
   );

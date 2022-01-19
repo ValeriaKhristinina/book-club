@@ -5,7 +5,7 @@ export enum AppRoute {
   Root = '/',
   NewMeeting = '/new-meeting',
   Meeting = '/meeting',
-  Book = '/book/:id'
+  Participant = '/participant/:id'
 }
 
 export const PARTICIPANTS: Participant[] = [

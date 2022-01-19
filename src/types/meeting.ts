@@ -12,3 +12,5 @@ export type Meeting = {
   choosingBy: string,
   persons: Person[],
 }
+
+export type Meetings = Meeting[]

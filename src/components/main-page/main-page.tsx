@@ -1,10 +1,16 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+
 import { AppRoute, choosingPerson, newQueque } from '../../const';
 import './main-page.css';
 import Rating from '../rating/rating';
-import { useState } from 'react';
+
 
 function MainPage(): JSX.Element {
+  const meetings = useSelector((state: RootState) => state.meetings);
+  console.log(meetings)
   const [isActive, setActive] = useState(false)
   const clickActiveHandler = () => isActive ? setActive(false) : setActive(true)
 
@@ -22,6 +28,10 @@ function MainPage(): JSX.Element {
         <section className="main-content__block">
           <h3 className="main-content__title">Will discuss:</h3>
           <div>BOOK</div>
+        </section>
+        <section className="main-content__block">
+          <h3 className="main-content__title">Choosed by:</h3>
+          <div>NAME</div>
         </section>
         <section className="main-content__block main-content__block--all-width">
           <h3 className="main-content__title">Who choose next book :</h3>
