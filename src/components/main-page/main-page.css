@@ -62,6 +62,7 @@
   opacity: 0.5;
 }
 
-/* .queque-list__item:first-child {
-  opacity: 1;
-} */
+.last-book h3, 
+.last-book p {
+  margin-bottom: 8px;
+}

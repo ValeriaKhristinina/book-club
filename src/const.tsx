@@ -1,10 +1,9 @@
 import { Participant } from "./types/participant";
-import { createNewQueque, createPersonsArray } from "./utils/utils";
 
 export enum AppRoute {
   Root = '/',
   NewMeeting = '/new-meeting',
-  Meeting = '/meeting',
+  NextMeeting = '/next-meeting',
   Participant = '/participant/:id'
 }
 
@@ -40,9 +39,3 @@ export const PARTICIPANTS: Participant[] = [
     joinDate: '2020-12-05',
   },
 ]
-
-export const personsArray = createPersonsArray(PARTICIPANTS);
-
-export const choosingPerson = PARTICIPANTS[4]
-
-export const newQueque = createNewQueque(choosingPerson, personsArray);

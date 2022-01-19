@@ -16,6 +16,7 @@ export const getMeetingsAsync = createAsyncThunk(
 export const meetingsSlice = createSlice({
 	name: 'meetings',
 	initialState: {
+		isDataLoaded: false,
 		meetings: []
 	} as MeetingsData,
 	reducers: {
@@ -23,6 +24,7 @@ export const meetingsSlice = createSlice({
 	extraReducers: (builder) => {
     builder.addCase(getMeetingsAsync.fulfilled, (state, action) => {
       state.meetings = action.payload
+			state.isDataLoaded = true
     })
   },
 });

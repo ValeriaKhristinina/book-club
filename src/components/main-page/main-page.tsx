@@ -3,15 +3,23 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 
-import { AppRoute, choosingPerson, newQueque } from '../../const';
+import { AppRoute } from '../../const';
 import './main-page.css';
 import Rating from '../rating/rating';
+import { createNewQueque, createPersonsArray } from '../../utils/utils';
 
 
 function MainPage(): JSX.Element {
-  const meetings = useSelector((state: RootState) => state.meetings);
-  console.log(meetings)
+  const meetings = useSelector((state: RootState) => state.meetings.meetings);
+  const participants = useSelector((state: RootState) => state.participants.participants)
   const [isActive, setActive] = useState(false)
+
+  const choosingPerson = participants[5]
+  const fullNames = createPersonsArray(participants)
+  const newQueque = createNewQueque(choosingPerson, fullNames);
+
+  const lastBook = meetings[meetings.length - 1]
+
   const clickActiveHandler = () => isActive ? setActive(false) : setActive(true)
 
   return (
@@ -22,7 +30,7 @@ function MainPage(): JSX.Element {
         <section className="main-content__block">
           <h3 className="main-content__title">Next meeting:</h3>
           <div>
-            <Link to={AppRoute.Meeting}><time>DATE</time></Link>
+            <Link to={AppRoute.NextMeeting}><time>DATE</time></Link>
           </div>
         </section>
         <section className="main-content__block">
@@ -48,11 +56,14 @@ function MainPage(): JSX.Element {
         </section>
         <section className="main-content__block">
           <h3 className="main-content__title">Last discussed book:</h3>
-          <div>BOOK_NAME</div>
+          <div className="last-book">
+            <h3>{lastBook.title}</h3>
+            <p>{lastBook.author}</p>
+          </div>
         </section>
         <section className="main-content__block">
           <h3 className="main-content__title">Average raiting last book:</h3>
-          <Rating />
+          {/* <Rating /> */}
         </section>
       </section>
     </section >

@@ -1,7 +1,5 @@
 import { Participant } from '../types/participant';
 
-
-// From object all participants make array of FullNames strings
 export const createPersonsArray = (persons: Participant[]): string[] => {
   let newArray = persons.map(item => {
     const fullName = item.firstName + " " + item.lastName;

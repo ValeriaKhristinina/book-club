@@ -14,6 +14,7 @@ export const getParticipantsAsync = createAsyncThunk(
 export const participantsSlice = createSlice({
 	name: 'participants',
 	initialState: {
+		isDataLoaded: false,
 		participants: []
 	} as ParticipantsData,
 	reducers: {
@@ -21,6 +22,7 @@ export const participantsSlice = createSlice({
 	extraReducers: (builder) => {
     builder.addCase(getParticipantsAsync.fulfilled, (state, action) => {
       state.participants = action.payload
+			state.isDataLoaded = true
     })
   },
 });
