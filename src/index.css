@@ -22,6 +22,15 @@ ul {
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: var(--grey-color);
+}
+
 fieldset {
   border: none;
   padding: 0;

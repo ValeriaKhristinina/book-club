@@ -29,14 +29,14 @@ export const participantsSlice = createSlice({
 	reducers: {
 	},
 	extraReducers: (builder) => {
-    builder.addCase(getParticipantsAsync.fulfilled, (state, action) => {
-      state.participants = action.payload
+		builder.addCase(getParticipantsAsync.fulfilled, (state, action) => {
+			state.participants = action.payload
 			state.isDataLoaded = true
-    });
+		});
 		builder.addCase(getParticipantByIdAsync.fulfilled, (state, action) => {
-      state.singleParticipant = action.payload
-    })
-  },
+			state.singleParticipant = action.payload
+		})
+	},
 });
 
 export default participantsSlice.reducer

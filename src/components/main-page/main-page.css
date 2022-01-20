@@ -50,6 +50,11 @@
   color: black;
 }
 
+.next-meeting-link{
+  display: block;
+  margin-bottom: 16px;
+}
+
 .queque-list {
   padding-top: 24px;
   display: flex;

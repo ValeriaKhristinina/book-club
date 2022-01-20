@@ -17,5 +17,6 @@ export const createNewQueque = (choosingPerson: Participant, persons: Participan
     const secondCutArray = persons.slice(0, indexChoosingPerson)
     newQueque = firstCutArray.concat(secondCutArray);
   }
+
   return newQueque;
 }

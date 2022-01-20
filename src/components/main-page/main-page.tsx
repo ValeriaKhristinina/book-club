@@ -30,7 +30,8 @@ function MainPage(): JSX.Element {
         <section className="main-content__block">
           <h3 className="main-content__title">Next meeting:</h3>
           <div>
-            <Link to={AppRoute.NextMeeting}><time>DATE</time></Link>
+            <Link className="next-meeting-link" to={AppRoute.NextMeeting}><time>DATE</time></Link>
+            <div className="link-see-all">See all past meetings</div>
           </div>
         </section>
         <section className="main-content__block">
