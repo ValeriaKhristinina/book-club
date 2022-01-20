@@ -7,3 +7,6 @@ fetch(BACKAND_URL + '/meetings')
 
 export const fetchParticipants = () => fetch(BACKAND_URL + '/participants')
   .then((response) => response.json())
+
+export const fetchParticipantById = (id: number) => fetch(`${BACKAND_URL}/participants/${id}`)
+  .then((response) => response.json())

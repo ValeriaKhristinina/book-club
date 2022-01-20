@@ -5,18 +5,18 @@ import { RootState } from '../../store/store';
 
 import { AppRoute } from '../../const';
 import './main-page.css';
-import Rating from '../rating/rating';
-import { createNewQueque, createPersonsArray } from '../../utils/utils';
+import { createNewQueque } from '../../utils/utils';
 
 
 function MainPage(): JSX.Element {
+
   const meetings = useSelector((state: RootState) => state.meetings.meetings);
   const participants = useSelector((state: RootState) => state.participants.participants)
+  // const participantPath = `/participant/${participants[id]}`;
   const [isActive, setActive] = useState(false)
 
   const choosingPerson = participants[5]
-  const fullNames = createPersonsArray(participants)
-  const newQueque = createNewQueque(choosingPerson, fullNames);
+  const newQueque = createNewQueque(choosingPerson, participants);
 
   const lastBook = meetings[meetings.length - 1]
 
@@ -43,12 +43,12 @@ function MainPage(): JSX.Element {
         </section>
         <section className="main-content__block main-content__block--all-width">
           <h3 className="main-content__title">Who choose next book :</h3>
-          <div className="main-content__subtitle">{choosingPerson.firstName} {choosingPerson.lastName}</div>
+          <div className="main-content__subtitle"><Link to={`/participant/${choosingPerson.id}`}>{choosingPerson.firstName} {choosingPerson.lastName}</Link></div>
           <div onClick={clickActiveHandler} className="link-see-all">{!isActive ? '+ See all list' : '- See less'}</div>
           {isActive && (
             <ul className="queque-list">
               {newQueque.map(person => (
-                <li className="queque-list__item" key={person}>{person}</li>
+                <li className="queque-list__item" key={person.id}><Link to={`/participant/${person.id}`}>{person.firstName} {person.lastName}</Link></li>
               ))}
             </ul>
           )
@@ -63,7 +63,9 @@ function MainPage(): JSX.Element {
         </section>
         <section className="main-content__block">
           <h3 className="main-content__title">Average raiting last book:</h3>
-          {/* <Rating /> */}
+          <div className="raiting-last-book">
+            RATING
+          </div>
         </section>
       </section>
     </section >

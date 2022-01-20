@@ -8,10 +8,14 @@ export const createPersonsArray = (persons: Participant[]): string[] => {
   return newArray;
 }
 
-export const createNewQueque = (choosingPerson: Participant, personsArray: string[]): string[] => {
-  const fullName = choosingPerson.firstName + " " + choosingPerson.lastName
-  const indexOfPerson = personsArray.indexOf(fullName)
-  const firstCutArray = personsArray.slice(indexOfPerson + 1)
-  const secondCutArray = personsArray.slice(0, indexOfPerson)
-  return firstCutArray.concat(secondCutArray);
+export const createNewQueque = (choosingPerson: Participant, persons: Participant[]): Participant[] => {
+  let newQueque: Participant[] = []
+  const findPersonInArray = persons.find((person) => person.id === choosingPerson.id)
+  if (findPersonInArray) {
+    const indexChoosingPerson = persons.indexOf(findPersonInArray);
+    const firstCutArray = persons.slice(indexChoosingPerson + 1)
+    const secondCutArray = persons.slice(0, indexChoosingPerson)
+    newQueque = firstCutArray.concat(secondCutArray);
+  }
+  return newQueque;
 }

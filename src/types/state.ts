@@ -9,4 +9,5 @@ export type MeetingsData = {
 export type ParticipantsData = {
   isDataLoaded: boolean,
   participants: Participant[],
+  singleParticipant: Participant | null,
 }

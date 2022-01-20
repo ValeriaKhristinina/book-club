@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchParticipants } from "../services/api";
+import { fetchParticipantById, fetchParticipants } from "../services/api";
 import { Participant } from "../types/participant";
 import { ParticipantsData } from "../types/state";
 
@@ -11,11 +11,20 @@ export const getParticipantsAsync = createAsyncThunk(
 	}
 );
 
+export const getParticipantByIdAsync = createAsyncThunk(
+	'participants/getParticipantByIdAsync',
+	async (id: number) => {
+		const response = await fetchParticipantById(id);
+		return response as Participant
+	}
+);
+
 export const participantsSlice = createSlice({
 	name: 'participants',
 	initialState: {
 		isDataLoaded: false,
-		participants: []
+		participants: [],
+		singleParticipant: null,
 	} as ParticipantsData,
 	reducers: {
 	},
@@ -23,6 +32,9 @@ export const participantsSlice = createSlice({
     builder.addCase(getParticipantsAsync.fulfilled, (state, action) => {
       state.participants = action.payload
 			state.isDataLoaded = true
+    });
+		builder.addCase(getParticipantByIdAsync.fulfilled, (state, action) => {
+      state.singleParticipant = action.payload
     })
   },
 });
