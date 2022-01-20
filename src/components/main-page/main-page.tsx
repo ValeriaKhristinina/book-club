@@ -5,20 +5,21 @@ import { RootState } from '../../store/store';
 
 import { AppRoute } from '../../const';
 import './main-page.css';
-import { createNewQueque } from '../../utils/utils';
+import { calculateAverageRating, createNewQueque } from '../../utils/utils';
 
 
 function MainPage(): JSX.Element {
-
   const meetings = useSelector((state: RootState) => state.meetings.meetings);
   const participants = useSelector((state: RootState) => state.participants.participants)
-  // const participantPath = `/participant/${participants[id]}`;
   const [isActive, setActive] = useState(false)
 
   const choosingPerson = participants[5]
   const newQueque = createNewQueque(choosingPerson, participants);
 
   const lastBook = meetings[meetings.length - 1]
+  const lastChoosingParticipant = participants.find(person => Number(person.id) === Number(lastBook.choosingById))
+
+  calculateAverageRating(lastBook)
 
   const clickActiveHandler = () => isActive ? setActive(false) : setActive(true)
 
@@ -39,7 +40,7 @@ function MainPage(): JSX.Element {
           <div>BOOK</div>
         </section>
         <section className="main-content__block">
-          <h3 className="main-content__title">Choosed by:</h3>
+          <h3 className="main-content__title">Chosen by:</h3>
           <div>NAME</div>
         </section>
         <section className="main-content__block main-content__block--all-width">
@@ -63,9 +64,13 @@ function MainPage(): JSX.Element {
           </div>
         </section>
         <section className="main-content__block">
+          <h3 className="main-content__title">Chosen by:</h3>
+          <div>{lastChoosingParticipant?.firstName} {lastChoosingParticipant?.lastName}</div>
+        </section>
+        <section className="main-content__block">
           <h3 className="main-content__title">Average raiting last book:</h3>
           <div className="raiting-last-book">
-            RATING
+            {calculateAverageRating(lastBook)}
           </div>
         </section>
       </section>

@@ -1,3 +1,4 @@
+import { Meeting } from '../types/meeting';
 import { Participant } from '../types/participant';
 
 export const createPersonsArray = (persons: Participant[]): string[] => {
@@ -17,6 +18,16 @@ export const createNewQueque = (choosingPerson: Participant, persons: Participan
     const secondCutArray = persons.slice(0, indexChoosingPerson)
     newQueque = firstCutArray.concat(secondCutArray);
   }
-
   return newQueque;
+}
+
+export const calculateAverageRating = (lastBook: Meeting): number => {
+  const votingPersons = lastBook.persons.filter(rating => rating.rating !== null)
+  const result = votingPersons.reduce((sum, current) => sum + current.rating, 0);
+  const averageValue = result / votingPersons.length
+  return averageValue
+}
+
+export const findPersonById = () => {
+
 }
