@@ -5,19 +5,25 @@ import { RootState } from '../../store/store';
 
 import { AppRoute } from '../../const';
 import './main-page.css';
-import { calculateAverageRating, createNewQueque } from '../../utils/utils';
+import { calculateAverageRating, checkVisitingParticipants, createNewQueque } from '../../utils/utils';
 
 
 function MainPage(): JSX.Element {
-  const meetings = useSelector((state: RootState) => state.meetings.meetings);
-  const participants = useSelector((state: RootState) => state.participants.participants)
   const [isActive, setActive] = useState(false)
 
+  const meetings = useSelector((state: RootState) => state.meetings.meetings);
+  const participants = useSelector((state: RootState) => state.participants.participants)
+
   const choosingPerson = participants[5]
-  const newQueque = createNewQueque(choosingPerson, participants);
+  const lastFourMeetings = meetings.slice(-4);
+  const visitingParticipants = checkVisitingParticipants(lastFourMeetings, participants);
+  console.log(visitingParticipants)
+  const newQueque = createNewQueque(choosingPerson, participants, visitingParticipants);
+  console.log(newQueque)
 
   const lastBook = meetings[meetings.length - 1]
   const lastChoosingParticipant = participants.find(person => Number(person.id) === Number(lastBook.choosingById))
+  const nextChoosingParticipant = newQueque.find(person => Number(person.id) === Number(lastBook.choosingById + 1))
 
   calculateAverageRating(lastBook)
 
@@ -45,7 +51,7 @@ function MainPage(): JSX.Element {
         </section>
         <section className="main-content__block main-content__block--all-width">
           <h3 className="main-content__title">Who choose next book :</h3>
-          <div className="main-content__subtitle"><Link to={`/participant/${choosingPerson.id}`}>{choosingPerson.firstName} {choosingPerson.lastName}</Link></div>
+          <div className="main-content__subtitle"><Link to={`/participant/${nextChoosingParticipant?.id}`}>{nextChoosingParticipant?.firstName} {nextChoosingParticipant?.lastName}</Link></div>
           <div onClick={clickActiveHandler} className="link-see-all">{!isActive ? '+ See all list' : '- See less'}</div>
           {isActive && (
             <ul className="queque-list">
