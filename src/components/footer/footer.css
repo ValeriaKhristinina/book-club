@@ -1,6 +1,9 @@
 .footer {
+  position: absolute;
+  bottom: 0;
   display: flex;
   justify-content: end;
+  width: 100%;
   margin-top: 8px;
   padding: 16px 0;
 }
