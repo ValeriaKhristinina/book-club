@@ -9,7 +9,7 @@ export type Meeting = {
   date: string,
   title: string,
   author: string,
-  choosingById: string,
+  chosenById: number,
   persons: Person[],
 }
 
