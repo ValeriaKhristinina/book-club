@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import moment from 'moment';
-import { getParticipantByIdAsync } from '../../store/participants';
-import { RootState } from '../../store/store';
+
 import './participant-page.css';
+import { getParticipantByIdAsync } from '../../store/participants';
+import { formatDate } from '../../utils/utils';
+import { getSingleParticipant } from '../../store/selectors';
 
 function ParticipantPage(): JSX.Element {
   const params = useParams();
@@ -15,13 +16,13 @@ function ParticipantPage(): JSX.Element {
     dispatch(getParticipantByIdAsync(Number(participantId)))
   }, [dispatch, participantId]);
 
-  const participant = useSelector((state: RootState) => state.participants.singleParticipant)
+  const participant = useSelector(getSingleParticipant)
 
   if (!participant) {
     return <div>No person</div>
   }
 
-  const joinDate = moment(participant.joinDate).format("D MMMM YYYY");
+  const joinDate = formatDate(participant.joinDate);
 
   return (
     <section className="participant-page container">

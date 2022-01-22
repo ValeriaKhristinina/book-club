@@ -1,9 +1,12 @@
-import './meeting-page.css';
-import { PARTICIPANTS } from '../../const';
+import { useSelector } from 'react-redux';
 import { useState } from 'react';
+
+import './meeting-page.css';
 import Rating from '../rating/rating';
+import { getParticipants } from '../../store/selectors';
 
 function NextMeetingPage(): JSX.Element {
+  const participants = useSelector(getParticipants)
   const [isActive, setActive] = useState(false)
   const clickPlusHandler = () => {
     if (isActive) {
@@ -37,7 +40,7 @@ function NextMeetingPage(): JSX.Element {
         {isActive && (
           <>
             <form className="participants-form" action="">
-              {PARTICIPANTS.map(participant => (
+              {participants.map(participant => (
                 <fieldset className="participants-form__participant">
                   <input id={`${participant.id}+${participant.lastName}`} type="checkbox" />
                   <label htmlFor={`${participant.id}+${participant.lastName}`}>{participant.firstName} {participant.lastName}</label>

@@ -1,29 +1,27 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
 
-import { AppRoute } from '../../const';
+
 import './main-page.css';
+import { AppRoute } from '../../const';
+import { getParticipants, getMeetings } from '../../store/selectors';
 import { calculateAverageRating, checkVisitingParticipants, createNewQueque } from '../../utils/utils';
+import { useSelector } from 'react-redux';
 
 
 function MainPage(): JSX.Element {
   const [isActive, setActive] = useState(false)
+  const participants = useSelector(getParticipants);
+  const meetings = useSelector(getMeetings);
 
-  const meetings = useSelector((state: RootState) => state.meetings.meetings);
-  const participants = useSelector((state: RootState) => state.participants.participants)
-
-  const choosingPerson = participants[5]
+  const choosingPerson = participants[2];
   const lastFourMeetings = meetings.slice(-4);
   const visitingParticipants = checkVisitingParticipants(lastFourMeetings, participants);
-  console.log(visitingParticipants)
   const newQueque = createNewQueque(choosingPerson, participants, visitingParticipants);
-  console.log(newQueque)
 
   const lastBook = meetings[meetings.length - 1]
-  const lastChoosingParticipant = participants.find(person => Number(person.id) === Number(lastBook.choosingById))
-  const nextChoosingParticipant = newQueque.find(person => Number(person.id) === Number(lastBook.choosingById + 1))
+  const lastChoosingParticipant = participants.find(person => person.id === lastBook.chosenById)
+  const nextChoosingParticipant = newQueque.find(person => person.id === lastBook.chosenById + 1)
 
   calculateAverageRating(lastBook)
 
@@ -71,7 +69,7 @@ function MainPage(): JSX.Element {
         </section>
         <section className="main-content__block">
           <h3 className="main-content__title">Chosen by:</h3>
-          <div>{lastChoosingParticipant?.firstName} {lastChoosingParticipant?.lastName}</div>
+          <div><Link to={`/participant/${lastChoosingParticipant?.id}`}>{lastChoosingParticipant?.firstName} {lastChoosingParticipant?.lastName}</Link></div>
         </section>
         <section className="main-content__block">
           <h3 className="main-content__title">Average raiting last book:</h3>

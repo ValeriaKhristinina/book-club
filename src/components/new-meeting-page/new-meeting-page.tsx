@@ -1,7 +1,9 @@
+import { useSelector } from 'react-redux';
 import './new-meeting-page.css';
-import { PARTICIPANTS } from '../../const';
+import { getParticipants } from '../../store/selectors';
 
 function NewMeetingPage(): JSX.Element {
+  const participants = useSelector(getParticipants)
   return (
     <section className="new-meeting-page container">
       <form className="meeting-form" action="">
@@ -17,7 +19,7 @@ function NewMeetingPage(): JSX.Element {
           <h3 className="meeting-form__title">Who choose:</h3>
           <select name="participants" id="participants">
             {
-              PARTICIPANTS.map(participant => {
+              participants.map(participant => {
                 return (
                   <option value={participant.id}>{`${participant.firstName} ${participant.lastName}`}</option>
                 )
