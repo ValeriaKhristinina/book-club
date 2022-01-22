@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { Meeting } from '../types/meeting';
 import { Participant } from '../types/participant';
 
@@ -50,6 +51,6 @@ export const calculateAverageRating = (lastBook: Meeting): number => {
   return averageValue
 }
 
-export const findPersonById = () => {
-
+export const formatDate = (date: string): string => {
+  return moment(date).format("D MMMM YYYY");
 }
