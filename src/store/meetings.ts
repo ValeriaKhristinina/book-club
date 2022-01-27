@@ -1,5 +1,5 @@
 // import {AppState} from '../types/state';
-import {fetchMeetings} from '../services/api';
+import { fetchMeetings, createNewMeeting } from '../services/api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { MeetingsData } from '../types/state';
@@ -13,6 +13,14 @@ export const getMeetingsAsync = createAsyncThunk(
 	}
 );
 
+export const createNewMeetingAsync = createAsyncThunk(
+	'meetings/createNewMeetingAsync',
+	async (meeting: Meeting) => {
+		const response = await createNewMeeting(meeting)
+		return response as Meeting
+	}
+)
+
 export const meetingsSlice = createSlice({
 	name: 'meetings',
 	initialState: {
@@ -22,11 +30,14 @@ export const meetingsSlice = createSlice({
 	reducers: {
 	},
 	extraReducers: (builder) => {
-    builder.addCase(getMeetingsAsync.fulfilled, (state, action) => {
-      state.meetings = action.payload
+		builder.addCase(getMeetingsAsync.fulfilled, (state, action) => {
+			state.meetings = action.payload
 			state.isDataLoaded = true
-    })
-  },
+		})
+		builder.addCase(createNewMeetingAsync.fulfilled, (state, action) => {
+			state.meetings.push(action.payload)
+		})
+	},
 });
 
 export default meetingsSlice.reducer;

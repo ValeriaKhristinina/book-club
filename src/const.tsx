@@ -1,7 +1,7 @@
 export enum AppRoute {
   Root = '/',
   NextMeeting = '/meeting/next',
-  NewMeeting = '/meeting/new',
+  NewForm = '/new-form/',
   AllMeetings = '/meeting/all',
   Meeting = '/meeting/:id',
   Participant = '/participant/:id'

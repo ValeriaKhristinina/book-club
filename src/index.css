@@ -42,9 +42,13 @@ fieldset {
   margin: 0 auto;
 }
 
+.visually-hidden {
+  display: none;
+}
+
 .btn {
   font-size: 24px;
-  padding: 10px 16px;
+  padding: 10px 24px;
   margin-bottom: 16px;
   background-color: inherit;
   border: 1px solid var(--grey-color);
@@ -56,3 +60,7 @@ fieldset {
   background-color: var(--grey-color);
   color: white;
 }
+
+.btn[type="submit"] {
+  max-width: 160px;
+} 
