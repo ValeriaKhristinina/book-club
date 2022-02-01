@@ -1,9 +1,8 @@
-// import {AppState} from '../types/state';
 import { fetchMeetings, createNewMeeting } from '../services/api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { MeetingsData } from '../types/state';
-import { Meeting } from '../types/meeting';
+import { Meeting, MeetingBase } from '../types/meeting';
 
 export const getMeetingsAsync = createAsyncThunk(
 	'meetings/getMeetingsAsync',
@@ -15,7 +14,7 @@ export const getMeetingsAsync = createAsyncThunk(
 
 export const createNewMeetingAsync = createAsyncThunk(
 	'meetings/createNewMeetingAsync',
-	async (meeting: Meeting) => {
+	async (meeting: MeetingBase) => {
 		const response = await createNewMeeting(meeting)
 		return response as Meeting
 	}
