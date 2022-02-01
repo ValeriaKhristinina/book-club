@@ -79,7 +79,7 @@ function NextMeetingPage(): JSX.Element {
               ))
               }
             </form>
-            <button className="btn" type="submit">Submit and close meeting</button>
+            <button className="btn btn--wide" type="submit">Submit and close meeting</button>
           </>
         )}
       </section>

@@ -8,7 +8,6 @@ import { getParticipants, getLastBook, getChoosingParticipant, getCompletedMeeti
 import { calculateAverageRating, checkVisitingParticipants, createNewQueque, formatDate } from '../../utils/utils';
 import { useSelector } from 'react-redux';
 
-
 function MainPage(): JSX.Element {
   const [isActive, setActive] = useState(false)
 
@@ -25,13 +24,13 @@ function MainPage(): JSX.Element {
 
   const lastChoosingParticipant = participants.find((person) => person.id === lastBook.chosenById)
   const nextChoosingParticipant = newQueque[0]
+  newQueque.splice(0, 1)
 
   const clickActiveHandler = () => isActive ? setActive(false) : setActive(true)
 
   return (
 
     <section className="main-page">
-
       <section className="main-content container">
         <section className="main-content__block">
           <h3 className="main-content__title">Next meeting:</h3>
@@ -61,7 +60,11 @@ function MainPage(): JSX.Element {
           {isActive && (
             <ul className="queque-list">
               {newQueque.map(person => (
-                <li className="queque-list__item" key={person.id}><Link to={`/participant/${person.id}`}>{person.firstName} {person.lastName}</Link></li>
+                <li className="queque-list__item" key={person.id}>
+                  <Link to={`/participant/${person.id}`}>
+                    {person.firstName} {person.lastName}
+                  </Link>
+                </li>
               ))}
             </ul>
           )
