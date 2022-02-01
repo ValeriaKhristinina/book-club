@@ -17,6 +17,9 @@ export const createPersonsArray = (persons: Participant[]): string[] => {
 export const checkVisitingParticipants = (meetings: Meeting[], participants: Participant[]): VisitingStructure => {
   let newObj: VisitingStructure = {}
   meetings.map((item) => {
+    if (!item.persons) {
+      return false
+    }
     item.persons.map((person) => {
       if (typeof newObj[person.id] !== "undefined") {
         newObj[person.id] += 1
@@ -30,8 +33,13 @@ export const checkVisitingParticipants = (meetings: Meeting[], participants: Par
   return newObj;
 }
 
-export const createNewQueque = (choosingPerson: Participant, persons: Participant[], visitingParticipants: VisitingStructure): Participant[] => {
+export const createNewQueque = (choosingPerson: Participant | undefined, persons: Participant[], visitingParticipants: VisitingStructure): Participant[] => {
   let newQueque: Participant[] = []
+
+  if (!choosingPerson) {
+    return []
+  }
+
   const findPersonInArray = persons.find((person) => person.id === choosingPerson.id)
   if (findPersonInArray) {
     const indexChoosingPerson = persons.indexOf(findPersonInArray);
@@ -45,12 +53,18 @@ export const createNewQueque = (choosingPerson: Participant, persons: Participan
 }
 
 export const calculateAverageRating = (lastBook: Meeting): number => {
+  if (!lastBook.persons) {
+    return 0
+  }
   const votingPersons = lastBook.persons.filter(rating => rating.rating !== null)
   const result = votingPersons.reduce((sum, current) => sum + current.rating, 0);
   const averageValue = result / votingPersons.length
   return averageValue
 }
 
-export const formatDate = (date: string): string => {
+export const formatDate = (date: string | undefined): string => {
+  if (!date) {
+    return ''
+  }
   return moment(date).format("D MMMM YYYY");
 }
