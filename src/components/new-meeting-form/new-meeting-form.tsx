@@ -1,5 +1,6 @@
 import { FormEvent, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createNewMeetingAsync } from "../../store/meetings";
 import { getParticipants } from '../../store/selectors';
 
 function NewMeetingForm(): JSX.Element {
@@ -7,12 +8,23 @@ function NewMeetingForm(): JSX.Element {
   const [author, setAuthor] = useState('');
   const [choosingParticipant, setChoosingParticipant] = useState('1')
   const [date, setDate] = useState('')
+  const dispatch = useDispatch();
 
   const participants = useSelector(getParticipants)
+
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     console.log(title, author, choosingParticipant, date)
+    dispatch(createNewMeetingAsync({
+      date: date,
+      title: title,
+      author: author,
+      chosenById: Number(choosingParticipant),
+      isComplete: false,
+      persons: [],
+    }))
+
     setTitile('')
     setAuthor('')
     setChoosingParticipant('1')
