@@ -46,8 +46,6 @@ export const getChoosingParticipant = (state: RootState) => {
   return participants.find((user) => user.id === participantID)
 }
 
-
-
 export const getMeetingsWithAllInfo = (state: RootState) => {
   const meetings = state.meetings.meetings;
   const participants = state.participants.participants;
@@ -70,7 +68,14 @@ export const getMeetingsWithAllInfo = (state: RootState) => {
       persons
     }
   })
-
-  console.log(meetingsWithAllInfo)
   return meetingsWithAllInfo;
+}
+
+export const getAllParticipantChoosedBook = (state: RootState) => {
+  const meetings = state.meetings.meetings;
+  const participant = getSingleParticipant(state)
+  const participantChoosedBooks = meetings.filter((book) => book.chosenById === participant?.id)
+
+  return participantChoosedBooks
+
 }

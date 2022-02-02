@@ -1,4 +1,4 @@
-import { fetchMeetings, createNewMeeting } from '../services/api';
+import { fetchMeetings, createNewMeeting, deleteMeeting } from '../services/api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { MeetingsData } from '../types/state';
@@ -20,6 +20,14 @@ export const createNewMeetingAsync = createAsyncThunk(
 	}
 )
 
+export const deleteMeetingAsync = createAsyncThunk(
+	'meetings/deleteMeetingAsync',
+	async (meetingID: number) => {
+		await deleteMeeting(meetingID)
+		return meetingID
+	}
+)
+
 export const meetingsSlice = createSlice({
 	name: 'meetings',
 	initialState: {
@@ -35,6 +43,9 @@ export const meetingsSlice = createSlice({
 		})
 		builder.addCase(createNewMeetingAsync.fulfilled, (state, action) => {
 			state.meetings.push(action.payload)
+		})
+		builder.addCase(deleteMeetingAsync.fulfilled, (state, action) => {
+			state.meetings = state.meetings.filter(meeting => meeting.id !== action.payload)
 		})
 	},
 });
