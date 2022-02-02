@@ -2,13 +2,14 @@
 :root {
   --grey-color: #aaa69d;
   --main-bg-color: #f7f1e3;
+  --red-color: #e55039;
 }
 
 body {
   font-family: sans-serif;
   font-size: 24px;
   margin: 0;
-  background-color: var(--main-bg-color);
+  /* background-color: var(--main-bg-color); */
 }
 
 p,h1, h2, h3 {
@@ -48,6 +49,7 @@ fieldset {
 
 .btn {
   font-size: 24px;
+  max-width: 330px;
   padding: 10px 24px;
   margin-bottom: 16px;
   background-color: inherit;
@@ -59,12 +61,20 @@ fieldset {
 .btn:hover {
   background-color: var(--grey-color);
   color: white;
+  transform: scale(1.1);
 }
 
-.btn[type="submit"] {
-  max-width: 160px;
-} 
-
-.btn--wide {
-  max-width: 330px;
+.btn-delete:hover {
+  background-color: var(--red-color);
 }
+
+.btn--red {
+  color: white;
+  background-color: var(--red-color);
+}
+
+.btn--red:hover {
+  background-color: var(--red-color);
+  
+}
+
