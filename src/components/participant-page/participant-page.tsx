@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import './participant-page.css';
 import { getParticipantByIdAsync } from '../../store/participants';
 import { formatDate } from '../../utils/utils';
-import { getSingleParticipant } from '../../store/selectors';
+import { getAllParticipantChoosedBook, getSingleParticipant } from '../../store/selectors';
 
 function ParticipantPage(): JSX.Element {
   const params = useParams();
@@ -17,6 +17,7 @@ function ParticipantPage(): JSX.Element {
   }, [dispatch, participantId]);
 
   const participant = useSelector(getSingleParticipant)
+  const choosedBooks = useSelector(getAllParticipantChoosedBook)
 
   if (!participant) {
     return <div>No person</div>
@@ -33,26 +34,13 @@ function ParticipantPage(): JSX.Element {
         <p className="participant__visited-count">Visited meetings: COUNT</p>
         <p className="participant__chose-book">Chose this books:</p>
         <section className="participant__books">
-          <section className="participant__book">
-            <div className="participant__book-avatar"></div>
-            <div className="participant__book-title">TITLE</div>
-            <div className="participant__book-author">AUTHOR</div>
-          </section>
-          <section className="participant__book">
-            <div className="participant__book-avatar"></div>
-            <div className="participant__book-title">TITLE</div>
-            <div className="participant__book-author">AUTHOR</div>
-          </section>
-          <section className="participant__book">
-            <div className="participant__book-avatar"></div>
-            <div className="participant__book-title">TITLE</div>
-            <div className="participant__book-author">AUTHOR</div>
-          </section>
-          <section className="participant__book">
-            <div className="participant__book-avatar"></div>
-            <div className="participant__book-title">TITLE</div>
-            <div className="participant__book-author">AUTHOR</div>
-          </section>
+          {choosedBooks.map((book) => (
+            <section className="participant__book" key={book.id}>
+              <div className="participant__book-avatar"></div>
+              <div className="participant__book-title">{book.title}</div>
+              <div className="participant__book-author">{book.author}</div>
+            </section>
+          ))}
         </section>
       </section>
     </section>
