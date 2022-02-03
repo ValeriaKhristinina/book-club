@@ -33,6 +33,14 @@ export const getNextMeeting = (state: RootState) => {
     } else {
       return acc
     }
+  }, {
+    id: 0,
+    date: 'No Date',
+    title: 'No Title',
+    author: 'No Author',
+    chosenById: 1,
+    isComplete: false,
+    persons: [],
   })
 
   return nextMeeting
