@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './form-page.css';
 
+import Page from '../page/page';
 import NewMeetingForm from '../new-meeting-form/new-meeting-form';
 import NewParticipantForm from '../new-participant-form/new-participant-form';
 
@@ -29,22 +30,24 @@ function NewFormPage(): JSX.Element {
   }
 
   return (
-    <section className="forms container">
-      <section className="new-meeting">
-        {isActiveMeetingForm && (
-          <NewMeetingForm />
-        )}
-        <button onClick={clickActiveMeetingHandler} className={`btn ${isActiveMeetingForm ? 'visually-hidden' : ''}`}>+ Create new meeting</button>
+    <Page>
+      <section className="forms container">
+        <section className="new-meeting">
+          {isActiveMeetingForm && (
+            <NewMeetingForm />
+          )}
+          <button onClick={clickActiveMeetingHandler} className={`btn ${isActiveMeetingForm ? 'visually-hidden' : ''}`}>+ Create new meeting</button>
 
+        </section>
+        <section className="new-participant">
+          {isActiveParticipantForm && (
+            <NewParticipantForm />
+          )
+          }
+          <button onClick={clickActivePArticipantHandler} className={`btn ${isActiveParticipantForm ? 'visually-hidden' : ''}`}>+ Create new participant</button>
+        </section>
       </section>
-      <section className="new-participant">
-        {isActiveParticipantForm && (
-          <NewParticipantForm />
-        )
-        }
-        <button onClick={clickActivePArticipantHandler} className={`btn ${isActiveParticipantForm ? 'visually-hidden' : ''}`}>+ Create new participant</button>
-      </section>
-    </section>
+    </Page>
   )
 }
 

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -6,9 +6,8 @@ import './app.css';
 import { getMeetingsAsync } from '../../store/meetings';
 import { getParticipantsAsync } from '../../store/participants';
 import { AppRoute } from '../../const'
-import Header from '../header/header';
-import Footer from '../footer/footer';
-import MainPage from '../main-page/main-page'
+import MainPage from '../main-page/main-page';
+import LoginPage from '../login-page/login-page';
 import FormPage from '../form-page/form-page';
 import NextMeetingPage from '../next-meeting-page/next-meeting-page';
 import MeetingsPage from '../meetings-page/meetings-page';
@@ -34,16 +33,15 @@ function App(): JSX.Element {
   }
   return (
     <section className="app">
-      <Header />
       <Routes>
         <Route path={AppRoute.Root} element={<MainPage />} ></Route>
         <Route path={AppRoute.NewForm} element={<FormPage />} ></Route>
         <Route path={AppRoute.NextMeeting} element={<NextMeetingPage />} ></Route>
         <Route path={AppRoute.Participant} element={<ParticipantPage />} ></Route>
         <Route path={AppRoute.AllMeetings} element={<MeetingsPage />}></Route>
+        <Route path={AppRoute.Login} element={<LoginPage />} ></Route>
         <Route path='*' element={<ErrorPage />}></Route>
       </Routes >
-      <Footer />
     </section>
   );
 }

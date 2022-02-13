@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import './participant-page.css';
+import Page from '../page/page';
 import { getParticipantByIdAsync } from '../../store/participants';
 import { formatDate } from '../../utils/utils';
-import { getAllParticipantChoosedBook, getSingleParticipant } from '../../store/selectors';
+import { getAllParticipantChoosedBook, getAllVisitedMeetings, getSingleParticipant } from '../../store/selectors';
 
 function ParticipantPage(): JSX.Element {
   const params = useParams();
@@ -19,6 +20,8 @@ function ParticipantPage(): JSX.Element {
   const participant = useSelector(getSingleParticipant)
   const choosedBooks = useSelector(getAllParticipantChoosedBook)
 
+  const visiredMeetings = useSelector(getAllVisitedMeetings(Number(participantId)))
+
   if (!participant) {
     return <div>No person</div>
   }
@@ -26,24 +29,26 @@ function ParticipantPage(): JSX.Element {
   const joinDate = formatDate(participant.joinDate);
 
   return (
-    <section className="participant-page container">
-      <section className="participant">
-        <section className="participant__avatar"></section>
-        <h2 className="participant__name">{participant.firstName} {participant.lastName}</h2>
-        <p className="participant__join">Join date: {joinDate}</p>
-        <p className="participant__visited-count">Visited meetings: COUNT</p>
-        <p className="participant__chose-book">Chose this books:</p>
-        <section className="participant__books">
-          {choosedBooks.map((book) => (
-            <section className="participant__book" key={book.id}>
-              <div className="participant__book-avatar"></div>
-              <div className="participant__book-title">{book.title}</div>
-              <div className="participant__book-author">{book.author}</div>
-            </section>
-          ))}
+    <Page>
+      <section className="participant-page container">
+        <section className="participant">
+          <section className="participant__avatar"></section>
+          <h2 className="participant__name">{participant.firstName} {participant.lastName}</h2>
+          <p className="participant__join">Join date: {joinDate}</p>
+          <p className="participant__visited-count">Visited meetings: {visiredMeetings.length}</p>
+          <p className="participant__chose-book">Chose this books:</p>
+          <section className="participant__books">
+            {choosedBooks.map((book) => (
+              <section className="participant__book" key={book.id}>
+                <div className="participant__book-avatar"></div>
+                <div className="participant__book-title">{book.title}</div>
+                <div className="participant__book-author">{book.author}</div>
+              </section>
+            ))}
+          </section>
         </section>
       </section>
-    </section>
+    </Page>
   )
 }
 
