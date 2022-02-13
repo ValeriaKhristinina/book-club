@@ -1,6 +1,7 @@
-import { MeetingBase } from "../types/meeting";
+import { Meeting, MeetingBase } from "../types/meeting";
+import { ParticipantBase } from "../types/participant";
 
-const BACKAND_URL = 'http://localhost:3004';
+const BACKAND_URL = 'https://x8ki-letl-twmt.n7.xano.io/api:uSSlIyia';
 
 const BACKAND_URL_MEETINGS = BACKAND_URL + '/meetings'
 const BACKAND_URL_PARTICIPANTS = BACKAND_URL + '/participants'
@@ -24,8 +25,27 @@ export const createNewMeeting = (meeting: MeetingBase) => fetch(BACKAND_URL_MEET
 })
   .then(response => response.json())
 
+export const createNewParticipant = (participant: ParticipantBase) => fetch(BACKAND_URL_PARTICIPANTS, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(participant)
+})
+  .then(response => response.json())
+
 
 export const deleteMeeting = (meetingID: number) => fetch(`${BACKAND_URL_MEETINGS}/${meetingID}`, {
   method: 'DELETE'
 })
   .then(response => response.json())
+
+export const completeMeeting = (meeting: Meeting) => fetch(`${BACKAND_URL_MEETINGS}/${meeting.id}`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    ...meeting,
+    meetings_id: meeting.id
+  })
+})
+  .then((response) => response.json())
+
+
