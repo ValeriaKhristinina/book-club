@@ -80,3 +80,8 @@ export const getAllParticipantChoosedBook = (state: RootState) => {
   return participantChoosedBooks
 
 }
+
+export const getAllVisitedMeetings = (participantID: number) => (state: RootState) => {
+  const meetings = state.meetings.meetings;
+  return meetings.filter((item) => item.persons.find((person) => person.id === participantID))
+};
