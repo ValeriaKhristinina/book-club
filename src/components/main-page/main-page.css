@@ -67,6 +67,12 @@
   opacity: 0.5;
 }
 
+.last-book {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .last-book h3, 
 .last-book p {
   margin-bottom: 8px;
