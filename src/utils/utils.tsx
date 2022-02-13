@@ -58,7 +58,7 @@ export const calculateAverageRating = (lastBook: Meeting): number => {
   }
   const votingPersons = lastBook.persons.filter(rating => rating.rating !== null)
   const result = votingPersons.reduce((sum, current) => sum + current.rating, 0);
-  const averageValue = result / votingPersons.length
+  const averageValue = Math.round((result / votingPersons.length) * 10) / 10
   return averageValue
 }
 

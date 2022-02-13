@@ -6,11 +6,11 @@ import { getParticipants } from '../../store/selectors';
 function NewMeetingForm(): JSX.Element {
   const [title, setTitile] = useState('');
   const [author, setAuthor] = useState('');
-  const [choosingParticipant, setChoosingParticipant] = useState('1')
+  const participants = useSelector(getParticipants)
+  const [choosingParticipant, setChoosingParticipant] = useState(participants[0].id)
   const [date, setDate] = useState('')
   const dispatch = useDispatch();
 
-  const participants = useSelector(getParticipants)
 
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
@@ -27,7 +27,6 @@ function NewMeetingForm(): JSX.Element {
 
     setTitile('')
     setAuthor('')
-    setChoosingParticipant('1')
     setDate('')
   }
 
@@ -43,7 +42,7 @@ function NewMeetingForm(): JSX.Element {
 
       <section className="form-block">
         <h3 className="form-block__title">Who choose:</h3>
-        <select onChange={(e) => { setChoosingParticipant(e.target.value) }} value={choosingParticipant} name="participants" id="participants">
+        <select onChange={(e) => { setChoosingParticipant(+e.target.value) }} value={choosingParticipant} name="participants" id="participants">
           {
             participants.map(participant => {
               return (

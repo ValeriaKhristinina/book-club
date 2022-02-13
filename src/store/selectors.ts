@@ -26,6 +26,7 @@ export const getLastBook = (state: RootState) => {
 
 export const getNextMeeting = (state: RootState) => {
   const nextMeetings = getNextMeetings(state)
+  if (!nextMeetings.length) return null
 
   const nextMeeting = nextMeetings.reduce((acc: Meeting, currentMeeting: Meeting): Meeting => {
     if (moment(acc.date).isAfter(currentMeeting.date)) {
@@ -33,15 +34,7 @@ export const getNextMeeting = (state: RootState) => {
     } else {
       return acc
     }
-  }, {
-    id: 0,
-    date: 'No Date',
-    title: 'No Title',
-    author: 'No Author',
-    chosenById: 1,
-    isComplete: false,
-    persons: [],
-  })
+  }, nextMeetings[0])
 
   return nextMeeting
 }

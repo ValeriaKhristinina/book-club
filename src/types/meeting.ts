@@ -1,6 +1,6 @@
 type Person = {
   id: number,
-  fullName: string,
+  // fullName: string,
   rating: number
 }
 

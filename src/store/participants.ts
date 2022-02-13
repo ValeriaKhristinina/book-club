@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchParticipantById, fetchParticipants } from "../services/api";
-import { Participant } from "../types/participant";
+import { createNewParticipant, fetchParticipantById, fetchParticipants } from "../services/api";
+import { Participant, ParticipantBase } from "../types/participant";
 import { ParticipantsData } from "../types/state";
 
 export const getParticipantsAsync = createAsyncThunk(
@@ -18,6 +18,14 @@ export const getParticipantByIdAsync = createAsyncThunk(
 		return response as Participant
 	}
 );
+
+export const createNewParticipantAsync = createAsyncThunk(
+	'participants/createNewParticipantAsync',
+	async (participant: ParticipantBase) => {
+		const response = await createNewParticipant(participant)
+		return response as ParticipantBase
+	}
+)
 
 export const participantsSlice = createSlice({
 	name: 'participants',
