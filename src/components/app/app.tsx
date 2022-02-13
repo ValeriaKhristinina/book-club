@@ -10,7 +10,7 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import MainPage from '../main-page/main-page'
 import FormPage from '../form-page/form-page';
-import MeetingPage from '../meeting-page/meeting-page';
+import NextMeetingPage from '../next-meeting-page/next-meeting-page';
 import MeetingsPage from '../meetings-page/meetings-page';
 import ParticipantPage from '../participant-page/participant-page';
 import LoadingPage from '../loading-page/loading-page';
@@ -38,7 +38,7 @@ function App(): JSX.Element {
       <Routes>
         <Route path={AppRoute.Root} element={<MainPage />} ></Route>
         <Route path={AppRoute.NewForm} element={<FormPage />} ></Route>
-        <Route path={AppRoute.NextMeeting} element={<MeetingPage />} ></Route>
+        <Route path={AppRoute.NextMeeting} element={<NextMeetingPage />} ></Route>
         <Route path={AppRoute.Participant} element={<ParticipantPage />} ></Route>
         <Route path={AppRoute.AllMeetings} element={<MeetingsPage />}></Route>
         <Route path='*' element={<ErrorPage />}></Route>
