@@ -1,17 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
 import './meetings-page.css';
-import { getMeetingsWithAllInfo } from '../../store/selectors';
+import { getAuthorizationStatus, getMeetingsWithAllInfo } from '../../store/selectors';
 import { formatDate } from "../../utils/utils";
 import { deleteMeetingAsync } from "../../store/meetings";
 import { Fragment, useState } from "react";
 import Page from "../page/page";
+import { AuthorizationStatus } from "../../const";
 
 function MeetingsPage(): JSX.Element {
+  const dispatch = useDispatch();
+
   const [isActiveModal, setActiveModal] = useState(false)
   const [meetingID, setMeetingID] = useState(0)
+
   const meetingsUsual = useSelector(getMeetingsWithAllInfo)
+  const authorizationStatus = useSelector(getAuthorizationStatus);
   const meetings = [...meetingsUsual].reverse();
-  const dispatch = useDispatch();
+
 
   const mainBody = document.querySelector('body')
   const mainHtml = document.querySelector('html')
@@ -65,9 +70,11 @@ function MeetingsPage(): JSX.Element {
                   </ul>
                 </div>
               </div>
-              <div className="meeting__block">
-                <button onClick={() => { setMeetingID(meeting.id); setActiveModal(true); }} className="btn btn-delete" type="button">Delete Meeting</button>
-              </div>
+              {authorizationStatus === AuthorizationStatus.Auth && (
+                <div className="meeting__block">
+                  <button onClick={() => { setMeetingID(meeting.id); setActiveModal(true); }} className="btn btn-delete" type="button">Delete Meeting</button>
+                </div>
+              )}
             </section>
 
 

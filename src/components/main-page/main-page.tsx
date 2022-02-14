@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
-
 import './main-page.css';
 import Page from '../page/page';
 import { AppRoute } from '../../const';
@@ -17,6 +16,7 @@ function MainPage(): JSX.Element {
   const lastBook = useSelector(getLastBook)
   const choosingPerson = useSelector(getChoosingParticipant)
   const nextMeeting = useSelector(getNextMeeting)
+
 
   const lastFourMeetings = meetings.slice(-4);
   const visitingParticipants = checkVisitingParticipants(lastFourMeetings, participants);

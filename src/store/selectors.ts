@@ -85,3 +85,5 @@ export const getAllVisitedMeetings = (participantID: number) => (state: RootStat
   const meetings = state.meetings.meetings;
   return meetings.filter((item) => item.persons.find((person) => person.id === participantID))
 };
+
+export const getAuthorizationStatus = (state: RootState) => state.user.authorizationStatus
