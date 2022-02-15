@@ -1,7 +1,7 @@
 type Person = {
   id: number,
-  // fullName: string,
-  rating: number
+  rating: number,
+  isVisited: boolean,
 }
 
 export type Meeting = {
