@@ -21,6 +21,9 @@ export const checkVisitingParticipants = (meetings: Meeting[], participants: Par
       return false
     }
     item.persons.map((person) => {
+      if (!person.isVisited) {
+        return false
+      }
       if (typeof newObj[person.id] !== "undefined") {
         newObj[person.id] += 1
       } else {

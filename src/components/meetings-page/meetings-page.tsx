@@ -61,9 +61,11 @@ function MeetingsPage(): JSX.Element {
                   <ul>
                     {
                       meeting.persons.map((person) => {
-                        return (
-                          <li key={person.id}>{person.firstName} {person.lastName}</li>
-                        )
+                        if (person.isVisited) {
+                          return (
+                            <li key={person.id}>{person.firstName} {person.lastName}</li>
+                          )
+                        }
                       })
                     }
                   </ul>
