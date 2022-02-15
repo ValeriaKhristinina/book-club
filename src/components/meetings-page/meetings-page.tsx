@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import './meetings-page.css';
 import { getAuthorizationStatus, getMeetingsWithAllInfo } from '../../store/selectors';
-import { formatDate } from "../../utils/utils";
+import { formatDate, calculateAverageRating } from "../../utils/utils";
 import { deleteMeetingAsync } from "../../store/meetings";
 import { Fragment, useState } from "react";
 import Page from "../page/page";
@@ -16,7 +16,6 @@ function MeetingsPage(): JSX.Element {
   const meetingsUsual = useSelector(getMeetingsWithAllInfo)
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const meetings = [...meetingsUsual].reverse();
-
 
   const mainBody = document.querySelector('body')
   const mainHtml = document.querySelector('html')
@@ -57,7 +56,7 @@ function MeetingsPage(): JSX.Element {
                 <div className="meeting__block-chose-by">{meeting.chosenByUser?.firstName} {meeting.chosenByUser?.lastName}</div>
               </div>
               <div className="meeting__block">
-                <div className="meeting__blockparticipants">
+                <div className="meeting__block">
                   <h2>Participants</h2>
                   <ul>
                     {
@@ -68,6 +67,10 @@ function MeetingsPage(): JSX.Element {
                       })
                     }
                   </ul>
+                </div>
+                <div className="meeting__block">
+                  <h2>Avarage rating</h2>
+                  <p>{calculateAverageRating(meeting)}</p>
                 </div>
               </div>
               {authorizationStatus === AuthorizationStatus.Auth && (
