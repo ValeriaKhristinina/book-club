@@ -72,6 +72,11 @@ export const getMeetingsWithAllInfo = (state: RootState) => {
   return meetingsWithAllInfo;
 }
 
+export const getCompletedMeetingsWithAllInfo = (state: RootState) => {
+  const meetings = getMeetingsWithAllInfo(state)
+  return meetings.filter((meeting) => meeting.isComplete === true)
+}
+
 export const getAllParticipantChoosedBook = (state: RootState) => {
   const meetings = state.meetings.meetings;
   const participant = getSingleParticipant(state)

@@ -36,7 +36,11 @@ function NextMeetingPage(): JSX.Element {
   const onSave = () => {
     const meeting = {
       ...nextMeeting,
-      persons: Object.keys(checkedUser).map(key => ({ id: Number(key), rating: 1 })),
+      persons: Object.keys(checkedUser).map(key => ({
+        id: Number(key),
+        rating: 1,
+        isVisited: true
+      })),
       isComplete: true,
     }
     dispatch(completeMeeting(meeting))
