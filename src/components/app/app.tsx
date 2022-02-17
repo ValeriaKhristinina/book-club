@@ -15,12 +15,14 @@ import ParticipantPage from '../participant-page/participant-page';
 import LoadingPage from '../loading-page/loading-page';
 import ErrorPage from '../error-page/error-page';
 import { getMeetingDataLoaded, getParticipantsDataLoaded } from '../../store/selectors';
+import { checkAuthAsync } from '../../store/user';
 
 function App(): JSX.Element {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMeetingsAsync())
     dispatch(getParticipantsAsync())
+    dispatch(checkAuthAsync())
   }, [dispatch]);
 
   const isMeetingDataLoaded = useSelector(getMeetingDataLoaded)

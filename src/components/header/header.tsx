@@ -1,11 +1,19 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/selectors';
+import { requireLogout } from '../../store/user';
 import './header.css';
 
 function Header(): JSX.Element {
+  const dispatch = useDispatch();
   const authorizationStatus = useSelector(getAuthorizationStatus)
+  const isAuth = authorizationStatus === AuthorizationStatus.Auth
+
+  const handleLogout = () => {
+    dispatch(requireLogout())
+  }
+
   return (
     <header className="header container">
       <section className='header-logo'>
@@ -15,12 +23,12 @@ function Header(): JSX.Element {
         </Link>
       </section>
       <section className='header-login'>
-        {authorizationStatus === AuthorizationStatus.NoAuth || authorizationStatus === AuthorizationStatus.Unknown && (
+        {!isAuth && (
           <Link to={AppRoute.Login} className="header-login__link">Login</Link>
         )}
 
-        {authorizationStatus === AuthorizationStatus.Auth && (
-          <a className="header-login__link">Logout</a>
+        {isAuth && (
+          <span onClick={handleLogout} className="header-login__link">Logout</span>
         )
 
         }
