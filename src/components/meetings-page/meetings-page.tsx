@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import './meetings-page.css';
-import { getAuthorizationStatus, getMeetingsWithAllInfo } from '../../store/selectors';
+import { getAuthorizationStatus, getCompletedMeetingsWithAllInfo } from '../../store/selectors';
 import { formatDate, calculateAverageRating } from "../../utils/utils";
 import { deleteMeetingAsync } from "../../store/meetings";
 import { Fragment, useState } from "react";
@@ -13,7 +13,7 @@ function MeetingsPage(): JSX.Element {
   const [isActiveModal, setActiveModal] = useState(false)
   const [meetingID, setMeetingID] = useState(0)
 
-  const meetingsUsual = useSelector(getMeetingsWithAllInfo)
+  const meetingsUsual = useSelector(getCompletedMeetingsWithAllInfo)
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const meetings = [...meetingsUsual].reverse();
 
@@ -45,6 +45,11 @@ function MeetingsPage(): JSX.Element {
         {meetings.map((meeting) => (
           <Fragment key={meeting.id}>
             <section className="meeting">
+              <div className="meeting__block meeting__block-cover">
+                {meeting.cover && (
+                  <img src={meeting.cover.url} alt="" />
+                )}
+              </div>
               <div className="meeting__block">
                 <h2 className="meeting__book-title">{meeting.title}</h2>
                 <p className="meeting__book-author">{meeting.author}</p>

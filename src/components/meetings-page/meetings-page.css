@@ -7,6 +7,21 @@
   border-bottom: 1px solid var(--grey-color);
 }
 
+.meeting__block {
+  margin-bottom: 16px;
+}
+
+.meeting__block-cover {
+  width: 200px;
+  height: 300px;
+  background-color: var(--light-grey-color);
+}
+
+.meeting__block-cover img {
+  width: inherit;
+  height: inherit;
+}
+
 .modal {
   position: absolute;
   top: 0;

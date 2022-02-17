@@ -9,6 +9,9 @@ export type Meeting = {
   date: string,
   title: string,
   author: string,
+  cover: {
+    url: string
+  },
   chosenById: number,
   isComplete: boolean,
   persons: Person[],

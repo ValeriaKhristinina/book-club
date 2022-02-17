@@ -60,6 +60,11 @@
   background-color: var(--grey-color);
 }
 
+.participant__book-avatar img {
+  width: inherit;
+  height: inherit;
+}
+
 .participant__book-title, .participant__book-author {
   font-size: 16px;
   margin-bottom: 4px;

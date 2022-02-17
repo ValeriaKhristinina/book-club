@@ -40,6 +40,7 @@
 
 .header-login__link {
   font-size: 20px;
+  cursor: pointer;
 }
 
 .header-login:hover .header-login__link{

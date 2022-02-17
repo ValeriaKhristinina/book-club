@@ -40,7 +40,11 @@ function ParticipantPage(): JSX.Element {
           <section className="participant__books">
             {choosedBooks.map((book) => (
               <section className="participant__book" key={book.id}>
-                <div className="participant__book-avatar"></div>
+                <div className="participant__book-avatar">
+                  {book.cover && (
+                    <img src={book.cover.url} alt="" />
+                  )}
+                </div>
                 <div className="participant__book-title">{book.title}</div>
                 <div className="participant__book-author">{book.author}</div>
               </section>
