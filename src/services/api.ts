@@ -22,13 +22,16 @@ function handleErrors(response: any) {
 
 export const fetchMeetings = () =>
   fetch(BACKAND_URL_MEETINGS)
+    .then(handleErrors)
     .then((response) => response.json())
 
 
 export const fetchParticipants = () => fetch(BACKAND_URL_PARTICIPANTS)
+  .then(handleErrors)
   .then((response) => response.json())
 
 export const fetchParticipantById = (id: number) => fetch(`${BACKAND_URL_PARTICIPANTS}/${id}`)
+  .then(handleErrors)
   .then((response) => response.json())
 
 
@@ -37,6 +40,7 @@ export const createNewMeeting = (meeting: MeetingBase) => fetch(BACKAND_URL_MEET
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify(meeting)
 })
+  .then(handleErrors)
   .then(response => response.json())
 
 export const createNewParticipant = (participant: ParticipantBase) => fetch(BACKAND_URL_PARTICIPANTS, {
@@ -44,12 +48,14 @@ export const createNewParticipant = (participant: ParticipantBase) => fetch(BACK
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify(participant)
 })
+  .then(handleErrors)
   .then(response => response.json())
 
 
 export const deleteMeeting = (meetingID: number) => fetch(`${BACKAND_URL_MEETINGS}/${meetingID}`, {
   method: 'DELETE'
 })
+  .then(handleErrors)
   .then(response => response.json())
 
 export const completeMeeting = (meeting: Meeting) => fetch(`${BACKAND_URL_MEETINGS}/${meeting.id}`, {
@@ -60,6 +66,7 @@ export const completeMeeting = (meeting: Meeting) => fetch(`${BACKAND_URL_MEETIN
     meetings_id: meeting.id
   })
 })
+  .then(handleErrors)
   .then((response) => response.json())
 
 export const login = (userEmail: string, userPassword: string) => fetch(BACKAND_URL_LOGIN, {
@@ -70,6 +77,7 @@ export const login = (userEmail: string, userPassword: string) => fetch(BACKAND_
     password: userPassword
   })
 })
+  .then(handleErrors)
   .then((response) => response.json())
 
 export const checkAuth = () => fetch(BACKAND_URL + '/auth/me', {
