@@ -6,6 +6,7 @@ import './app.css';
 import { getMeetingsAsync } from '../../store/meetings';
 import { getParticipantsAsync } from '../../store/participants';
 import { AppRoute } from '../../const'
+import PrivateRoute from '../private-route/private-route';
 import MainPage from '../main-page/main-page';
 import LoginPage from '../login-page/login-page';
 import FormPage from '../form-page/form-page';
@@ -37,7 +38,12 @@ function App(): JSX.Element {
     <section className="app">
       <Routes>
         <Route path={AppRoute.Root} element={<MainPage />} ></Route>
-        <Route path={AppRoute.NewForm} element={<FormPage />} ></Route>
+        <Route path={AppRoute.NewForm} element={
+          <PrivateRoute>
+            <FormPage />
+          </PrivateRoute>
+        } >
+        </Route>
         <Route path={AppRoute.NextMeeting} element={<NextMeetingPage />} ></Route>
         <Route path={AppRoute.Participant} element={<ParticipantPage />} ></Route>
         <Route path={AppRoute.AllMeetings} element={<MeetingsPage />}></Route>
