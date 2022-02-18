@@ -1,21 +1,27 @@
 import { FormEvent, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { useAppDispatch } from '../../store/store';
 import { loginAsync } from '../../store/user';
 import './login-page.css';
 
 function LoginPage(): JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  let navigate = useNavigate();
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(loginAsync({
-      userEmail: email,
-      userPassword: password
-    }))
+    try {
+      await dispatch(loginAsync({
+        userEmail: email,
+        userPassword: password
+      })).unwrap()
+      navigate(AppRoute.Root)
+    } catch (rejectedValueOrSerializedError) {
+      console.log('Please, login')
+    }
   }
 
   return (
