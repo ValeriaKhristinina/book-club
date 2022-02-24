@@ -1,10 +1,12 @@
+@import '../../variables.scss';
+
 .header {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 4px 0;
-  border-bottom: 1px solid var(--grey-color);
+  border-bottom: 1px solid $grey-color;
 }
 
 .header a {
@@ -44,5 +46,5 @@
 }
 
 .header-login:hover .header-login__link{
-  color: var(--grey-color)
+  color: $grey-color;
 }

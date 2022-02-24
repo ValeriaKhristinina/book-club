@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .next-meeting {
   padding: 80px 0;
 }
@@ -23,7 +25,7 @@
 
   margin-bottom: 8px;
 
-  color: var(--grey-color);
+  color: $grey-color;
 }
 
 .participants-form__participant {
