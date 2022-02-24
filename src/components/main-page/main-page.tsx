@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
-import './main-page.css';
+import './main-page.scss';
 import Page from '../page/page';
 import { AppRoute } from '../../const';
 import { getParticipants, getLastBook, getChoosingParticipant, getCompletedMeetings, getNextMeeting } from '../../store/selectors';

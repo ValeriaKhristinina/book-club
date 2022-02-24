@@ -1,42 +1,53 @@
+@import './variables.scss';
+
 body {
   font-family: sans-serif;
   font-size: 24px;
-  margin: 0; }
-  @media (max-width: 480px) {
-    body {
-      background-color: #e55039; } }
-
-p, h1, h2, h3 {
   margin: 0;
-  margin-bottom: 24px; }
+
+  @media (max-width: $mobile-width) {
+    background-color: $red-color;
+  }
+}
+
+p,h1, h2, h3 {
+  margin: 0;
+  margin-bottom: 24px;
+}
 
 ul {
   list-style-type: none;
   padding: 0;
-  margin: 0; }
+  margin: 0;
+}
 
 a {
   text-decoration: none;
-  color: inherit; }
+  color: inherit;
+}
 
 a:hover {
-  color: var(--grey-color); }
+  color: var(--grey-color);
+}
 
 fieldset {
   border: none;
   padding: 0;
-  margin: 0; }
+  margin: 0;
+}
 
 .container {
   max-width: 1280px;
-  margin: 0 auto; }
-  @media (max-width: 480px) {
-    .container {
-      width: 320px;
-      padding: 0 80px; } }
+  margin: 0 auto;
+  @media (max-width: $mobile-width) {
+    width: 320px;
+    padding: 0 80px;
+  }
+}
 
 .visually-hidden {
-  display: none; }
+  display: none;
+}
 
 .btn {
   font-size: 24px;
@@ -46,19 +57,26 @@ fieldset {
   background-color: inherit;
   border: 1px solid var(--grey-color);
   border-radius: 5px;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 .btn:hover {
   background-color: var(--grey-color);
   color: white;
-  transform: scale(1.1); }
+  transform: scale(1.1);
+}
 
 .btn-delete:hover {
-  background-color: var(--red-color); }
+  background-color: var(--red-color);
+}
 
 .btn--red {
   color: white;
-  background-color: var(--red-color); }
+  background-color: var(--red-color);
+}
 
 .btn--red:hover {
-  background-color: var(--red-color); }
+  background-color: var(--red-color);
+  
+}
+

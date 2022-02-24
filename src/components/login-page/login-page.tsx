@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../store/store';
 import { loginAsync } from '../../store/user';
-import './login-page.css';
+import './login-page.scss';
 
 function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();

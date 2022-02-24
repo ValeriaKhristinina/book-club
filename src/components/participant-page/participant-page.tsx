@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import './participant-page.css';
+import './participant-page.scss';
 import Page from '../page/page';
 import { getParticipantByIdAsync } from '../../store/participants';
 import { formatDate } from '../../utils/utils';

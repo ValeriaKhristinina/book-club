@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './form-page.css';
+import './form-page.scss';
 
 import Page from '../page/page';
 import NewMeetingForm from '../new-meeting-form/new-meeting-form';

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import './meetings-page.css';
+import './meetings-page.scss';
 import { getAuthorizationStatus, getCompletedMeetingsWithAllInfo } from '../../store/selectors';
 import { formatDate, calculateAverageRating } from "../../utils/utils";
 import { deleteMeetingAsync } from "../../store/meetings";

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/selectors';
 import { requireLogout } from '../../store/user';
-import './header.css';
+import './header.scss';
 
 function Header(): JSX.Element {
   const dispatch = useDispatch();

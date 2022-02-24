@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import './rating.css';
+import './rating.scss';
 
 function Rating(): JSX.Element {
   return (

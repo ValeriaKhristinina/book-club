@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { FormEvent, useState } from 'react';
 
-import './next-meeting-page.css';
+import './next-meeting-page.scss';
 import Page from '../page/page';
 import { getChoosingParticipant, getNextMeeting, getParticipants } from '../../store/selectors';
 import { Link } from 'react-router-dom';

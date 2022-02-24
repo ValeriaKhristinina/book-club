@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import './app.css';
+import './app.scss';
 import { getMeetingsAsync } from '../../store/meetings';
 import { getParticipantsAsync } from '../../store/participants';
 import { AppRoute } from '../../const'

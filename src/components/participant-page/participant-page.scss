@@ -1,57 +1,71 @@
 .participant-page {
-  padding: 80px 0; }
+  padding: 80px 0;
+}
 
 .participant {
   display: flex;
   flex-direction: column;
-  align-items: center; }
+  align-items: center;
+}
 
 .participant__avatar {
   width: 200px;
   height: 280px;
   margin-bottom: 32px;
-  background-color: var(--grey-color); }
+  background-color: var(--grey-color);
+}
 
 .participant__name {
   font-size: 40px;
-  font-weight: 400; }
+  font-weight: 400;
+}
 
 .participant__join {
   font-style: italic;
   margin-bottom: 10px;
-  color: var(--grey-color); }
+  color: var(--grey-color);
+}
 
 .participant__visited-count {
   margin-bottom: 40px;
-  color: var(--grey-color); }
+  color: var(--grey-color);
+}
 
 .participant__books {
   display: flex;
   justify-content: center;
-  width: 100%; }
+  width: 100%;
+}
 
 .participant__book {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 40px; }
+  margin-right: 40px;
+}
 
 .participant__book-title {
-  font-weight: bold; }
+  font-weight: bold;
+}
 
 .participant__chose-book {
-  font-size: 36px; }
+  font-size: 36px;
+  
+}
 
 .participant__book-avatar {
   width: 100px;
   height: 140px;
   margin-bottom: 8px;
-  background-color: var(--grey-color); }
+  background-color: var(--grey-color);
+}
 
 .participant__book-avatar img {
   width: inherit;
-  height: inherit; }
+  height: inherit;
+}
 
 .participant__book-title, .participant__book-author {
   font-size: 16px;
-  margin-bottom: 4px; }
+  margin-bottom: 4px;
+}
