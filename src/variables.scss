@@ -3,3 +3,14 @@ $light-grey-color: #D4D2CE;
 $red-color: #e55039;
 
 $mobile-width: 480px;
+$tablet-width: 1024px;
+
+@mixin iphoneX {
+  @media (max-width: $mobile-width) { @content; }
+}
+
+@mixin ipad {
+  @media (min-width: $mobile-width) and (max-width: $tablet-width){
+    @content;
+  }
+}

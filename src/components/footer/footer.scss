@@ -1,3 +1,4 @@
+@import '../../variables';
 .footer {
   position: absolute;
   bottom: 0;
@@ -10,6 +11,10 @@
 
 .copyright {
   font-size: 16px;
+
+  @include iphoneX {
+    font-size: 14px;
+  }
 }
 
 .copyright a {

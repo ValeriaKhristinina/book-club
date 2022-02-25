@@ -1,3 +1,6 @@
+$star-width: 98px;
+$star-height: 16px;
+
 .rate {
   float: left;
   height: 46px;
@@ -24,4 +27,46 @@
 .rate:not(:checked) > label:hover,
 .rate:not(:checked) > label:hover ~ label {
   color: #ffc700;  
+}
+
+.reviews__stars{
+  width: $star-width;
+  height: $star-height;
+}
+.reviews__stars::before{
+  width: $star-width;
+  background-size: $star-width $star-height;
+}
+.reviews__stars span{
+  width: 0%;
+}
+.reviews__stars span::before{
+    width: $star-width;
+    background-size: $star-width $star-height;
+  }
+
+.rating__stars{
+  position:relative;
+  display:block;
+  font-size:0;
+}
+.rating__stars::before{
+  content:"";
+  display:inline-block;
+  height:100%;
+  background:url('../../../public/stars.svg') transparent no-repeat center;
+}
+.rating__stars span{
+  position:absolute;
+  top:0;
+  left:0;
+  display:inline-block;
+  height:100%;
+  overflow:hidden;
+}
+.rating__stars span::before{
+  content:"";
+  display:inline-block;
+  height:100%;
+  background:url('../../../public/stars-active.svg') transparent no-repeat center;
 }

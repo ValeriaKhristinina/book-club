@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import './main-page.scss';
 import Page from '../page/page';
-import { AppRoute } from '../../const';
+import { AppRoute, RatingName } from '../../const';
+import Rating from '../rating/rating';
 import { getParticipants, getLastBook, getChoosingParticipant, getCompletedMeetings, getNextMeeting } from '../../store/selectors';
 import { calculateAverageRating, checkVisitingParticipants, createNewQueque, formatDate } from '../../utils/utils';
-import { useSelector } from 'react-redux';
+
 
 function MainPage(): JSX.Element {
   const [isActive, setActive] = useState(false)
@@ -35,7 +37,7 @@ function MainPage(): JSX.Element {
         <section className="main-content container">
           <section className="main-content__block">
             <h3 className="main-content__title">Next meeting:</h3>
-            <div>
+            <div className="main-content__block-wrapper">
               <time>{formatDate(nextMeeting?.date)}</time>
               <div><Link className="link-see-all" to={AppRoute.AllMeetings}>See all past meetings</Link></div>
             </div>
@@ -84,6 +86,7 @@ function MainPage(): JSX.Element {
           </section>
           <section className="main-content__block">
             <h3 className="main-content__title">Average raiting last book:</h3>
+            <Rating name={RatingName.ReadOnly} />
             <div className="raiting-last-book">
               {calculateAverageRating(lastBook)}
             </div>

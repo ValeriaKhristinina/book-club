@@ -13,3 +13,8 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export enum RatingName {
+  Controlled = 'CONTROLLED',
+  ReadOnly = 'READ_ONLY'
+}
