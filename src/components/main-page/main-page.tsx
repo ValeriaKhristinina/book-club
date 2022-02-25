@@ -7,7 +7,7 @@ import Page from '../page/page';
 import { AppRoute, RatingName } from '../../const';
 import Rating from '../rating/rating';
 import { getParticipants, getLastBook, getChoosingParticipant, getCompletedMeetings, getNextMeeting } from '../../store/selectors';
-import { calculateAverageRating, checkVisitingParticipants, createNewQueque, formatDate } from '../../utils/utils';
+import { calculateAverageRating, checkVisitingParticipants, createNewQueque, formatDate, widthRating } from '../../utils/utils';
 
 
 function MainPage(): JSX.Element {
@@ -30,6 +30,8 @@ function MainPage(): JSX.Element {
   newQueque.splice(0, 1)
 
   const clickActiveHandler = () => isActive ? setActive(false) : setActive(true)
+
+  const averageRating = calculateAverageRating(lastBook);
 
   return (
     <Page>
@@ -86,9 +88,9 @@ function MainPage(): JSX.Element {
           </section>
           <section className="main-content__block">
             <h3 className="main-content__title">Average raiting last book:</h3>
-            <Rating name={RatingName.ReadOnly} />
+            <Rating name={RatingName.ReadOnly} averageValue={widthRating(averageRating)} />
             <div className="raiting-last-book">
-              {calculateAverageRating(lastBook)}
+              {averageRating}
             </div>
           </section>
         </section>

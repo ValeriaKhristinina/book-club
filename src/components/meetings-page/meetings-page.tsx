@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import './meetings-page.scss';
 import { getAuthorizationStatus, getCompletedMeetingsWithAllInfo } from '../../store/selectors';
-import { formatDate, calculateAverageRating } from "../../utils/utils";
+import { formatDate, calculateAverageRating, widthRating } from "../../utils/utils";
 import { deleteMeetingAsync } from "../../store/meetings";
 import { Fragment, useState } from "react";
 import Page from "../page/page";
-import { AuthorizationStatus } from "../../const";
+import { AuthorizationStatus, RatingName } from "../../const";
+import Rating from "../rating/rating";
 
 function MeetingsPage(): JSX.Element {
   const dispatch = useDispatch();
@@ -77,6 +78,7 @@ function MeetingsPage(): JSX.Element {
                 </div>
                 <div className="meeting__block">
                   <h2>Avarage rating</h2>
+                  <Rating name={RatingName.ReadOnly} averageValue={widthRating(calculateAverageRating(meeting))} />
                   <p>{calculateAverageRating(meeting)}</p>
                 </div>
               </div>

@@ -1,5 +1,5 @@
-$star-width: 98px;
-$star-height: 16px;
+$star-width: 150px;
+$star-height: 30px;
 
 .rate {
   float: left;
@@ -29,44 +29,35 @@ $star-height: 16px;
   color: #ffc700;  
 }
 
-.reviews__stars{
+
+.rating__stars{
+  position: relative;
+  // font-size: 0;
   width: $star-width;
   height: $star-height;
 }
-.reviews__stars::before{
-  width: $star-width;
-  background-size: $star-width $star-height;
-}
-.reviews__stars span{
-  width: 0%;
-}
-.reviews__stars span::before{
-    width: $star-width;
-    background-size: $star-width $star-height;
-  }
-
-.rating__stars{
-  position:relative;
-  display:block;
-  font-size:0;
-}
 .rating__stars::before{
   content:"";
-  display:inline-block;
+  display:block;
   height:100%;
+  width: $star-width;
   background:url('../../../public/stars.svg') transparent no-repeat center;
+  background-size: $star-width $star-height;
 }
-.rating__stars span{
+.rating__stars div{
   position:absolute;
   top:0;
   left:0;
-  display:inline-block;
+  display: block;
   height:100%;
+  width: 0%;
   overflow:hidden;
 }
-.rating__stars span::before{
+.rating__stars div::before{
   content:"";
-  display:inline-block;
+  display: block;
   height:100%;
+  width: $star-width;
   background:url('../../../public/stars-active.svg') transparent no-repeat center;
+  background-size: $star-width $star-height;
 }

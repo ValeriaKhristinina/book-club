@@ -61,9 +61,11 @@ export const calculateAverageRating = (lastBook: Meeting): number => {
   }
   const votingPersons = lastBook.persons.filter(rating => rating.rating !== null)
   const result = votingPersons.reduce((sum, current) => sum + current.rating, 0);
-  const averageValue = Math.round((result / votingPersons.length) * 10) / 10
+  const averageValue = Math.round((result / votingPersons.length) * 100) / 100
   return averageValue
 }
+
+export const widthRating = (rating: number): string => `${(100 * rating) / 5.0}%`;
 
 export const formatDate = (date: string | undefined): string => {
   if (!date) {
