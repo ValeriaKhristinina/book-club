@@ -41,7 +41,7 @@ function Card({ meeting, isNext }: CardProps): JSX.Element {
         <section className="card-info__rating rating">
           <div className="rating__wrapper">
             <Rating name={RatingName.ReadOnly} averageValue={widthRating(calculateAverageRating(meeting))} />
-            <section className="rating__average">({!isNaN(calculateAverageRating(meeting)) ? calculateAverageRating(meeting) : '0'})</section>
+            <section className="rating__average">({!Number.isNaN(calculateAverageRating(meeting)) ? calculateAverageRating(meeting) : '0'})</section>
           </div>
 
           <section className="rating__rated">

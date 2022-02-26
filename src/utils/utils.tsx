@@ -92,5 +92,3 @@ export const checkProgressColor = (progress: number): string => {
     return 'invalid percentage'
   }
 }
-
-export const isNaN = (possibleNaN: number): boolean => possibleNaN !== possibleNaN;
