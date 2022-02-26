@@ -1,3 +1,4 @@
+import { Participant } from './participant'
 type Person = {
   id: number,
   rating: number,
@@ -16,6 +17,16 @@ export type Meeting = {
   isComplete: boolean,
   persons: Person[],
 }
+
+export type MeetingAllInfo = Meeting & {
+  chosenByUser: Participant | undefined,
+}
+
+
+// export type MeetingWithInfo = {
+//   ...Meeting,
+//   chosenByUser: 
+// }
 
 export type Meetings = Meeting[]
 

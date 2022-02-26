@@ -16,6 +16,7 @@ function NewParticipantForm(): JSX.Element {
       firstName: firstName,
       lastName: lastName,
       joinDate: joinDate,
+      exitDate: null,
     }))
 
     setFirstName('')

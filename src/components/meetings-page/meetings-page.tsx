@@ -1,12 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import './meetings-page.scss';
 import { getAuthorizationStatus, getCompletedMeetingsWithAllInfo } from '../../store/selectors';
-import { formatDate, calculateAverageRating, widthRating } from "../../utils/utils";
 import { deleteMeetingAsync } from "../../store/meetings";
 import { Fragment, useState } from "react";
 import Page from "../page/page";
-import { AuthorizationStatus, RatingName } from "../../const";
-import Rating from "../rating/rating";
+import Card from '../card/card';
+import { AuthorizationStatus } from "../../const";
 
 function MeetingsPage(): JSX.Element {
   const dispatch = useDispatch();
@@ -45,53 +44,16 @@ function MeetingsPage(): JSX.Element {
       <section className="meetings-page container">
         {meetings.map((meeting) => (
           <Fragment key={meeting.id}>
-            <section className="meeting">
-              <div className="meeting__block meeting__block-cover">
-                {meeting.cover && (
-                  <img src={meeting.cover.url} alt="" />
-                )}
-              </div>
-              <div className="meeting__block">
-                <h2 className="meeting__book-title">{meeting.title}</h2>
-                <p className="meeting__book-author">{meeting.author}</p>
-              </div>
-              <div className="meeting__block">
-                <div className="meeting__block-date">{formatDate(meeting.date)}</div>
-              </div>
-              <div className="meeting__block">
-                <div className="meeting__block-chose-by">{meeting.chosenByUser?.firstName} {meeting.chosenByUser?.lastName}</div>
-              </div>
-              <div className="meeting__block">
-                <div className="meeting__block">
-                  <h2>Participants</h2>
-                  <ul>
-                    {
-                      meeting.persons.map((person) => {
-                        if (person.isVisited) {
-                          return (
-                            <li key={person.id}>{person.firstName} {person.lastName}</li>
-                          )
-                        }
-                      })
-                    }
-                  </ul>
-                </div>
-                <div className="meeting__block">
-                  <h2>Avarage rating</h2>
-                  <Rating name={RatingName.ReadOnly} averageValue={widthRating(calculateAverageRating(meeting))} />
-                  <p>{calculateAverageRating(meeting)}</p>
-                </div>
-              </div>
-              {authorizationStatus === AuthorizationStatus.Auth && (
-                <div className="meeting__block">
-                  <button onClick={() => { setMeetingID(meeting.id); setActiveModal(true); }} className="btn btn-delete" type="button">Delete Meeting</button>
-                </div>
-              )}
-            </section>
+            <Card meeting={meeting} isNext={false} />
 
-
+            {authorizationStatus === AuthorizationStatus.Auth && (
+              <div className="meeting__block">
+                <button onClick={() => { setMeetingID(meeting.id); setActiveModal(true); }} className="btn btn-delete" type="button">Delete Meeting</button>
+              </div>
+            )}
           </Fragment>
-        ))}
+        ))
+        }
 
         {isActiveModal && (
           <>

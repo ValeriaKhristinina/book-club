@@ -8,6 +8,7 @@ import { AppRoute, RatingName } from '../../const';
 import Rating from '../rating/rating';
 import { getParticipants, getLastBook, getChoosingParticipant, getCompletedMeetings, getNextMeeting } from '../../store/selectors';
 import { calculateAverageRating, checkVisitingParticipants, createNewQueque, formatDate, widthRating } from '../../utils/utils';
+import Card from '../card/card';
 
 
 function MainPage(): JSX.Element {
@@ -19,45 +20,31 @@ function MainPage(): JSX.Element {
   const choosingPerson = useSelector(getChoosingParticipant)
   const nextMeeting = useSelector(getNextMeeting)
 
-
   const lastFourMeetings = meetings.slice(-4);
   const visitingParticipants = checkVisitingParticipants(lastFourMeetings, participants);
-
   const newQueque = createNewQueque(choosingPerson, participants, visitingParticipants);
 
   const lastChoosingParticipant = participants.find((person) => person.id === lastBook.chosenById)
   const nextChoosingParticipant = newQueque[0]
   newQueque.splice(0, 1)
-
   const clickActiveHandler = () => isActive ? setActive(false) : setActive(true)
-
   const averageRating = calculateAverageRating(lastBook);
 
   return (
     <Page>
       <section className="main-page">
-        <section className="main-content container">
-          <section className="main-content__block">
-            <h3 className="main-content__title">Next meeting:</h3>
-            <div className="main-content__block-wrapper">
-              <time>{formatDate(nextMeeting?.date)}</time>
-              <div><Link className="link-see-all" to={AppRoute.AllMeetings}>See all past meetings</Link></div>
+        <section className="main-content container container--white">
+          <section className='next-book'>
+            <div className='next-book__deco'>
+              <h1>Next Book:</h1>
+              <div></div>
             </div>
+            {nextMeeting && (
+              <Card meeting={nextMeeting} isNext={true} />
+            )}
           </section>
-          <section className="main-content__block">
-            <h3 className="main-content__title">Will discuss:</h3>
-            <div>
-              <Link className="next-meeting-link" to={AppRoute.NextMeeting}>{nextMeeting?.title}</Link>
-            </div>
-          </section>
-          <section className="main-content__block">
-            <h3 className="main-content__title">Chosen by:</h3>
-            <div>
-              <Link to={`/participant/${choosingPerson?.id}`}>
-                {`${choosingPerson?.firstName} ${choosingPerson?.lastName}`}
-              </Link>
-            </div>
-          </section>
+
+
           <section className="main-content__block main-content__block--all-width">
             <h3 className="main-content__title">Who choose next book :</h3>
             <div className="main-content__subtitle"><Link to={`/participant/${nextChoosingParticipant?.id}`}>{nextChoosingParticipant?.firstName} {nextChoosingParticipant?.lastName}</Link></div>

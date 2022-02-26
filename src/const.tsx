@@ -1,3 +1,4 @@
+
 export enum AppRoute {
   Root = '/',
   Login = '/login',
@@ -18,3 +19,12 @@ export enum RatingName {
   Controlled = 'CONTROLLED',
   ReadOnly = 'READ_ONLY'
 }
+
+export enum ProgressColor {
+  Red = '#e55039',
+  Yellow = '#f9b300',
+  Green = '#2d9761'
+}
+
+export const EMOJI = ["📚", "📖", "🤎", "🤍"];
+export const COLORS = ["whitesmoke", "#b7b5b5", "lightblue", "lavender"];

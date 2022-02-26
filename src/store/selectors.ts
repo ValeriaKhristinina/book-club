@@ -1,5 +1,5 @@
 import moment from "moment";
-import { Meeting } from "../types/meeting";
+import { MeetingAllInfo } from "../types/meeting";
 import { RootState } from "./store"
 
 export const getMeetings = (state: RootState) => state.meetings.meetings;
@@ -8,46 +8,7 @@ export const getSingleParticipant = (state: RootState) => state.participants.sin
 export const getMeetingDataLoaded = (state: RootState) => state.meetings.isDataLoaded
 export const getParticipantsDataLoaded = (state: RootState) => state.participants.isDataLoaded
 
-export const getCompletedMeetings = (state: RootState) => {
-  const meetings = state.meetings.meetings;
-  return meetings.filter((item) => item.isComplete === true)
-}
-
-export const getNextMeetings = (state: RootState) => {
-  const meetings = state.meetings.meetings;
-  return meetings.filter((item) => item.isComplete === false)
-}
-
-export const getLastBook = (state: RootState) => {
-  const completedMeetings = getCompletedMeetings(state)
-
-  return completedMeetings[completedMeetings.length - 1]
-}
-
-export const getNextMeeting = (state: RootState) => {
-  const nextMeetings = getNextMeetings(state)
-  if (!nextMeetings.length) return null
-
-  const nextMeeting = nextMeetings.reduce((acc: Meeting, currentMeeting: Meeting): Meeting => {
-    if (moment(acc.date).isAfter(currentMeeting.date)) {
-      return currentMeeting
-    } else {
-      return acc
-    }
-  }, nextMeetings[0])
-
-  return nextMeeting
-}
-
-export const getChoosingParticipant = (state: RootState) => {
-  const nextMeeting = getNextMeeting(state)
-
-  const participants = state.participants.participants;
-  const participantID = nextMeeting?.chosenById
-  return participants.find((user) => user.id === participantID)
-}
-
-export const getMeetingsWithAllInfo = (state: RootState) => {
+export const getMeetingsWithAllInfo = (state: RootState): MeetingAllInfo[] => {
   const meetings = state.meetings.meetings;
   const participants = state.participants.participants;
 
@@ -72,7 +33,50 @@ export const getMeetingsWithAllInfo = (state: RootState) => {
   return meetingsWithAllInfo;
 }
 
-export const getCompletedMeetingsWithAllInfo = (state: RootState) => {
+export const getCompletedMeetings = (state: RootState) => {
+  const meetings = getMeetingsWithAllInfo(state)
+  return meetings.filter((item) => item.isComplete === true)
+}
+
+
+export const getNextMeetings = (state: RootState) => {
+  const meetings = getMeetingsWithAllInfo(state)
+  return meetings.filter((item) => !item.isComplete)
+}
+
+export const getLastBook = (state: RootState) => {
+  const completedMeetings = getCompletedMeetings(state)
+
+  return completedMeetings[completedMeetings.length - 1]
+}
+
+export const getNextMeeting = (state: RootState) => {
+  const nextMeetings = getNextMeetings(state)
+  if (!nextMeetings.length) return null
+
+  const nextMeeting = nextMeetings.reduce((acc: MeetingAllInfo, currentMeeting: MeetingAllInfo): MeetingAllInfo => {
+    if (moment(acc.date).isAfter(currentMeeting.date)) {
+      return currentMeeting
+    } else {
+      return acc
+    }
+  }, nextMeetings[0])
+
+  return nextMeeting
+}
+
+export const getChoosingParticipant = (state: RootState) => {
+  const nextMeeting = getNextMeeting(state)
+
+  const participants = state.participants.participants;
+  const participantID = nextMeeting?.chosenById
+  return participants.find((user) => user.id === participantID)
+}
+
+
+
+
+export const getCompletedMeetingsWithAllInfo = (state: RootState): MeetingAllInfo[] => {
   const meetings = getMeetingsWithAllInfo(state)
   return meetings.filter((meeting) => meeting.isComplete === true)
 }
@@ -92,3 +96,9 @@ export const getAllVisitedMeetings = (participantID: number) => (state: RootStat
 };
 
 export const getAuthorizationStatus = (state: RootState) => state.user.authorizationStatus
+
+export const getJoinedParticipantsByDate = (date: string) => (state: RootState) => {
+  const participants = state.participants.participants;
+  const result = participants.filter(person => moment(person.joinDate).isBefore(date))
+  return result
+}

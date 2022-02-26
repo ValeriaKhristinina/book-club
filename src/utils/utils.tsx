@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { ProgressColor } from '../const';
 import { Meeting } from '../types/meeting';
 import { Participant } from '../types/participant';
 
@@ -65,7 +66,7 @@ export const calculateAverageRating = (lastBook: Meeting): number => {
   return averageValue
 }
 
-export const widthRating = (rating: number): string => `${(100 * rating) / 5.0}%`;
+export const widthRating = (rating: number): string => `${(100 * rating) / 5.0}`;
 
 export const formatDate = (date: string | undefined): string => {
   if (!date) {
@@ -73,3 +74,23 @@ export const formatDate = (date: string | undefined): string => {
   }
   return moment(date).format("D MMMM YYYY");
 }
+
+export const getRandomElement = (array: string[]): string => {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
+export const visitingProgress = (visitingPersons: number, allPersons: number): number => Math.round(((100 * visitingPersons) / allPersons) * 100)
+
+export const checkProgressColor = (progress: number): string => {
+  if (progress <= 30) {
+    return ProgressColor.Red
+  } else if (progress > 30 && progress <= 60) {
+    return ProgressColor.Yellow
+  } else if (progress > 60 && progress <= 100) {
+    return ProgressColor.Green
+  } else {
+    return 'invalid percentage'
+  }
+}
+
+export const isNaN = (possibleNaN: number): boolean => possibleNaN !== possibleNaN;
