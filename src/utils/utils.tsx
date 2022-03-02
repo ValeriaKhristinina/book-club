@@ -79,7 +79,7 @@ export const getRandomElement = (array: string[]): string => {
   return array[Math.floor(Math.random() * array.length)];
 }
 
-export const visitingProgress = (visitingPersons: number, allPersons: number): number => Math.round(((100 * visitingPersons) / allPersons) * 100)
+export const visitingProgress = (visitingPersons: number, allPersons: number): number => Math.round(((10 * visitingPersons) / allPersons) * 10)
 
 export const checkProgressColor = (progress: number): string => {
   if (progress <= 30) {
