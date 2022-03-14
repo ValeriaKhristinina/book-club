@@ -15,7 +15,7 @@ body {
 
 p,h1, h2, h3 {
   margin: 0;
-  margin-bottom: 24px;
+  // margin-bottom: 24px;
 }
 
 ul {
@@ -47,16 +47,12 @@ fieldset {
 
   @include iphoneX {
     width: 320px;
-    padding: 0 80px;
+    padding: 0 24px;
   }
 
   @include ipad {
     width: 600px
   }
-}
-
-.container--white {
-  background-color: white;
 }
 
 .visually-hidden {

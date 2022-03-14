@@ -41,10 +41,10 @@ function MeetingsPage(): JSX.Element {
 
   return (
     <Page>
-      <section className="meetings-page container">
+      <section className="meetings-page cards container">
         {meetings.map((meeting) => (
-          <Fragment key={meeting.id}>
-            <Card meeting={meeting} isNext={false} />
+          <Fragment key={meeting.id} >
+            <Card meeting={meeting} />
 
             {authorizationStatus === AuthorizationStatus.Auth && (
               <div className="meeting__block">
@@ -70,7 +70,7 @@ function MeetingsPage(): JSX.Element {
         }
 
       </section>
-    </Page>
+    </Page >
   )
 }
 

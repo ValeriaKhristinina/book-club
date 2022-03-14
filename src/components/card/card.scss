@@ -1,21 +1,40 @@
 @import '../../variables.scss';
 
-$padding: 16px;
+$padding: 12px;
 
 body {
   background-color: $cl-whitesmoke;
 }
 
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  @include iphoneX {
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 16px;
+  }
+  
+}
+
 .card {
   position: relative;
   display: flex;
-  flex-direction: column;
-  width: 230px;
-  height: 380px;
-  padding-bottom: 16px;
-  border-radius: 25px;
-  box-shadow: 10px 5px 10px $cl-lightgrey;
-  background-color: white;
+  flex-direction: row;
+  width: 31%;
+  height: 300px;
+  padding: 0;
+  margin-bottom: 56px;
+
+  @include iphoneX {
+    width: 230px;
+    height: 380px;
+    flex-direction: column;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+  }
 }
 
 .card__next {
@@ -48,11 +67,18 @@ body {
   position: relative;
   display: flex;
   justify-content: center;
-  align-items:flex-end;
-  flex-basis: 60%;
+  align-items: center;
   padding-bottom: 12px;
   background-color: #e7e7e7;
-  border-radius: 25px 25px 0 0;
+  
+  border-radius: 25px 25px 0px 25px;
+
+  @include iphoneX {
+    align-items:flex-end;
+    flex-basis: 60%;
+    border-radius: 25px 25px 0 0;
+    
+  }
 }
 
 .card-deco__emoji {
@@ -70,20 +96,33 @@ body {
 }
 
 .card-deco__cover {
-  width: 100px;
-  height: 140px;
-  box-shadow: 10px 14px 25px $cl-lightgrey;
-  background-color:lavender;
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  height: inherit;
   border-radius: 5%;
   img{
     width: inherit;
     height: inherit;
     border-radius: inherit;
+    box-shadow: 10px 14px 25px $grey-color;
+  }
+
+  @include iphoneX {
+    width: 76%;
+    height: inherit;
   }
 }
 
 .card-info {
-  padding-top: 8px;
+  padding-top: 16px;
+
+  @include iphoneX {
+    padding-top: 8px;
+  }
+  
+
+
 }
 
 .card-info__rating {
@@ -102,27 +141,43 @@ body {
 }
 
 .rating__average {
-  font-size: 14px;
+  font-size: 16px;
   color: $cl-lightgrey;
+
+  @include iphoneX {
+    font-size: 14px;
+  }
 }
 
 .rating__rated, .card-info__time, .visiting__info-text {
-  font-size: 12px;
+  font-size: 16px;
   color: $cl-lightgrey;
+
+  @include iphoneX {
+    font-size: 12px;
+  }
 }
 
 .rating__rated--yellow, .visiting__info--yellow {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   color: $cl-yellow;
+  
+  @include iphoneX {
+    font-size: 14px;
+  }
 }
 
 
 .card-info__title {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 500;
   text-align: start;
   color: $cl-navy;
+
+  @include iphoneX {
+    font-size: 14px;
+  }
 }
 
 .card-info--wrapper {

@@ -1,10 +1,11 @@
 import { Fragment, useState } from 'react';
 import { RatingName } from '../../const';
+import { widthRating } from '../../utils/utils';
 import './rating.scss';
 
 type RatingProps = {
   name: string,
-  averageValue: string | null
+  averageValue: number
 }
 
 function Rating({ name, averageValue }: RatingProps): JSX.Element {
@@ -25,7 +26,7 @@ function Rating({ name, averageValue }: RatingProps): JSX.Element {
 
       {name === RatingName.ReadOnly && (
         <div className="rating__stars">
-          <div style={{ width: `${averageValue}` }}></div>
+          <div style={{ width: `${widthRating(averageValue)}%` }}></div>
         </div>
       )
       }

@@ -12,62 +12,38 @@
   }
 }
 
-.next-book {
+.main-content__block {
+  display: flex;
+  width: 100%;
+  margin-bottom: 80px;
+}
+
+.statistic {
+  justify-content: space-between;
+}
+
+.next {
+  justify-content: space-between;
+}
+
+.next-block {
+  flex: 1;
+
+  &:first-child {
+    margin-right: 32px;
+  }
+}
+
+.past {
+  flex-direction: column;
+}
+
+.past__meetings {
   display: flex;
   justify-content: space-between;
-  width: 100%;
 }
 
-.next-book__deco {
-  width: 500px;
 
-  div {
-    height: 100%;
-    background: url('../../../public/ginger-cat-cat-is-reading.png') no-repeat;
-    background-size: 600px;
-  }
-  
-}
-
-.main-content__block {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-basis: 33.3%;
-
-  margin-bottom: 80px;
-  padding: 32px 0;
-
-  @include iphoneX {
-    flex-basis: 100%;
-    margin-bottom: 20px;
-    padding: 16px 0;
-  }
-}
-
-.main-content__block::before {
-  content: "";
-  position: absolute;
-  bottom: 0px;
-  width: 50%;
-  height: 1px;
-  background-color: $grey-color;
-}
-
-.main-content__block--all-width{
-  flex-basis: 100%;
-}
-
-.main-content__block-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  time {
-    margin-bottom: 4px;
-  }
-}
 
 .main-content__title {
   font-size: 32px;
@@ -77,16 +53,6 @@
   @include iphoneX {
     font-size: 16px;
     margin-bottom: 21px;
-  }
-}
-
-.main-content__subtitle {
-  font-size: 34px;
-  margin-bottom: 24px;
-
-  @include iphoneX {
-    font-size: 28px;
-    margin-bottom: 10px;
   }
 }
 
@@ -104,11 +70,6 @@
   color: black;
 }
 
-.next-meeting-link{
-  display: block;
-  margin-bottom: 16px;
-}
-
 .queque-list {
   padding-top: 24px;
   display: flex;
@@ -119,15 +80,20 @@
 .queque-list__item {
   margin-bottom: 10px;
   opacity: 0.5;
+
+  &:first-child {
+    font-size: 32px;
+  }
 }
 
-.last-book {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.next-book {
+display: flex;
+width: inherit;
 }
 
-.last-book h3, 
-.last-book p {
-  margin-bottom: 8px;
+.next-book__cover {
+  width: 30%;
+  height: 280px;
+  margin-right: 24px;
+  background-color: antiquewhite;
 }

@@ -1,8 +1,15 @@
 import './card-wrapper.scss';
 
-function CardWrapper(): JSX.Element {
+type CardWrapperProps = {
+  children: React.ReactElement,
+  additionalClass?: string
+};
+
+function CardWrapper({ children, additionalClass }: CardWrapperProps): JSX.Element {
   return (
-    <section className="card-wrappper"></section>
+    <section className={`card-wrappper ${additionalClass}`}>
+      {children}
+    </section>
   )
 }
 
