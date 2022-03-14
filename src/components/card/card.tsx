@@ -21,7 +21,7 @@ function Card({ meeting }: CardProps): JSX.Element {
   const coverIrl = meeting.cover ? meeting.cover.url : 'no_photo'
 
   return (
-    <CardWrapper additionalClass="card">
+    <CardWrapper additionalClass="card-item">
       <section className='card'>
         <section className="card-deco card__container">
           <div

@@ -41,10 +41,10 @@ function MainPage(): JSX.Element {
               <p>Average rating: 3032</p>
             </CardWrapper>
             <CardWrapper>
-              <p>Members: 10</p>
+              <p>Members: {participants.length}</p>
             </CardWrapper>
             <CardWrapper>
-              <p>Meetings: 30</p>
+              <p>Meetings: {meetings.length}</p>
             </CardWrapper>
           </section>
 
