@@ -21,8 +21,10 @@
 .header__title{
   font-size: 32px;
   font-weight: 500;
+  padding: 16px 0;
   margin-right: 8px;
   margin-bottom: 0;
+  color: inherit;
 
   @include iphoneX {
     font-size: 16px;
@@ -48,6 +50,7 @@
   top: 50%;
   right: 0;
   transform: translateY(-50%);
+  color: inherit;
 }
 
 .header-login__link {

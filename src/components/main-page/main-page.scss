@@ -56,6 +56,12 @@
   }
 }
 
+.main-content__subtitle {
+  font-size: 24px;
+  margin-bottom: 40px;
+  color: $cl-navy;
+}
+
 .link-see-all {
   font-size: 16px;
   color: $grey-color;
@@ -80,10 +86,10 @@
 .queque-list__item {
   margin-bottom: 10px;
   opacity: 0.5;
+}
 
-  &:first-child {
-    font-size: 32px;
-  }
+.queque-list .queque-list__item:first-child {
+  font-size: 32px;
 }
 
 .next-book {
@@ -91,9 +97,21 @@ display: flex;
 width: inherit;
 }
 
+.next-book__info{
+  padding-top: 24px;
+}
+
 .next-book__cover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 30%;
   height: 280px;
   margin-right: 24px;
-  background-color: antiquewhite;
+  // background-image: url('../../../public/atomic-book.png');
+
+  img {
+    width: 100%;
+    height: auto;
+  }
 }

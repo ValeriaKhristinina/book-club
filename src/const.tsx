@@ -1,4 +1,3 @@
-
 export enum AppRoute {
   Root = '/',
   Login = '/login',
@@ -28,3 +27,5 @@ export enum ProgressColor {
 
 export const EMOJI = ["📚", "📖", "🤎", "🤍"];
 export const COLORS = ["whitesmoke", "#b7b5b5", "lightblue", "lavender"];
+
+export const DEFAULT_COVER_URL = '/atomic-book.png'

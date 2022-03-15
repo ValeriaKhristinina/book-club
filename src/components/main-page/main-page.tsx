@@ -1,36 +1,35 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import './main-page.scss';
 import Page from '../page/page';
-import { AppRoute } from '../../const';
-import { getParticipants, getLastBook, getChoosingParticipant, getCompletedMeetings, getNextMeeting } from '../../store/selectors';
+import { AppRoute, DEFAULT_COVER_URL } from '../../const';
+import { getParticipants, getChoosingParticipant, getCompletedMeetings, getNextMeeting } from '../../store/selectors';
 import { checkVisitingParticipants, createNewQueque, formatDate } from '../../utils/utils';
 import CardWrapper from '../card-wrapper/card-wrapper';
 import Card from '../card/card';
+import moment from 'moment';
 
 
 function MainPage(): JSX.Element {
-  // const [isActive, setActive] = useState(false)
 
   const participants = useSelector(getParticipants);
   const meetings = useSelector(getCompletedMeetings);
-  // const lastBook = useSelector(getLastBook)
   const choosingPerson = useSelector(getChoosingParticipant)
   const nextMeeting = useSelector(getNextMeeting)
 
   const lastFourMeetings = meetings.slice(-4);
   const visitingParticipants = checkVisitingParticipants(lastFourMeetings, participants);
   const newQueque = createNewQueque(choosingPerson, participants, visitingParticipants);
-  console.log(newQueque)
-
   const lastThreeMeetings = meetings.slice(-3).reverse()
 
-  // const lastChoosingParticipant = participants.find((person) => person.id === lastBook.chosenById)
-  // const nextChoosingParticipant = newQueque[0]
-  // const clickActiveHandler = () => isActive ? setActive(false) : setActive(true)
-  // const averageRating = calculateAverageRating(lastBook);
+  const diff = moment.duration(moment().diff(meetings[0].date));
+  const bookClubAge = diff.years() + ' years ' + diff.months() + ' month'
+
+  const bookCover = nextMeeting?.cover ? nextMeeting.cover.url : DEFAULT_COVER_URL
+
+  console.log(bookCover)
+
 
   return (
     <Page>
@@ -38,13 +37,13 @@ function MainPage(): JSX.Element {
         <section className="main-content container">
           <section className='main-content__block statistic'>
             <CardWrapper>
-              <p>Average rating: 3032</p>
+              <p>{bookClubAge}</p>
             </CardWrapper>
             <CardWrapper>
-              <p>Members: {participants.length}</p>
+              <p>{participants.length} members</p>
             </CardWrapper>
             <CardWrapper>
-              <p>Meetings: {meetings.length}</p>
+              <p>{meetings.length} meetings</p>
             </CardWrapper>
           </section>
 
@@ -54,13 +53,20 @@ function MainPage(): JSX.Element {
               {nextMeeting && (
                 <CardWrapper additionalClass='next-book'>
                   <>
-                    <div className='next-book__cover'></div>
+                    <div className='next-book__cover'>
+                      <img src={bookCover} alt="book_cover" />
+                    </div>
                     <div className='next-book__info'>
-                      <h1>{nextMeeting.title}</h1>
-                      <h1>{nextMeeting.author}</h1>
+                      <h1 className='main-content__subtitle'>{nextMeeting.title} <br /> by {nextMeeting.author}</h1>
+                      <h1 className='main-content__subtitle'></h1>
 
-                      <h1>Choosen by: {`${nextMeeting.chosenByUser?.firstName} ${nextMeeting.chosenByUser?.lastName}`}</h1>
-                      <p> Date: {formatDate(nextMeeting.date)}</p>
+                      <h1 className='main-content__subtitle'>
+                        Choosen by:&nbsp;
+                        <Link to={`/participant/${nextMeeting.chosenById}`} className='queque-list__item'>
+                          {`${nextMeeting.chosenByUser?.firstName} ${nextMeeting.chosenByUser?.lastName}`}
+                        </Link>
+                      </h1>
+                      <p className='main-content__subtitle'>See you {formatDate(nextMeeting.date)}</p>
                     </div>
 
                   </>
@@ -96,7 +102,7 @@ function MainPage(): JSX.Element {
           </section>
         </section>
       </section >
-    </Page>
+    </Page >
   )
 }
 
