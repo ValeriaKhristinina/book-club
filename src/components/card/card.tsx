@@ -4,7 +4,7 @@ import { calculateAverageRating, checkProgressColor, formatDate, getRandomElemen
 import { COLORS, DEFAULT_COVER_URL, EMOJI, RatingName } from '../../const';
 import { MeetingAllInfo } from '../../types/meeting';
 import Rating from '../rating/rating';
-import { getJoinedParticipantsByDate } from '../../store/selectors';
+import { getJoinedMembersByDate } from '../../store/selectors';
 import { useSelector } from 'react-redux';
 
 type CardProps = {
@@ -12,11 +12,11 @@ type CardProps = {
 }
 
 function Card({ meeting }: CardProps): JSX.Element {
-  const countJoinedParticipantsByDate = useSelector(getJoinedParticipantsByDate(meeting.date))
+  const countJoinedMembersByDate = useSelector(getJoinedMembersByDate(meeting.date))
 
-  const votingPersons = meeting.persons.filter((person) => person.rating != null)
-  const visitingPersons = meeting.persons.filter((person) => person.isVisited)
-  const progressPercentage = visitingProgress(visitingPersons.length, countJoinedParticipantsByDate.length)
+  const votingPersons = meeting.participants.filter((person) => person.rating != null)
+  const visitingPersons = meeting.participants.filter((person) => person.isVisited)
+  const progressPercentage = visitingProgress(visitingPersons.length, countJoinedMembersByDate.length)
   const averageRating = calculateAverageRating(meeting)
   const coverIrl = meeting.cover ? meeting.cover.url : DEFAULT_COVER_URL
 
@@ -42,7 +42,7 @@ function Card({ meeting }: CardProps): JSX.Element {
             </div>
 
             <section className="rating__rated">
-              <span className="rating__rated--yellow">{votingPersons.length}</span>/{countJoinedParticipantsByDate.length}
+              <span className="rating__rated--yellow">{votingPersons.length}</span>/{countJoinedMembersByDate.length}
             </section>
           </section>
           <h1 className="card-info__title">
@@ -65,7 +65,7 @@ function Card({ meeting }: CardProps): JSX.Element {
             <section className="visiting">
               <section className="visiting__info">
                 <span className="visiting__info-text">
-                  <span style={{ color: `${checkProgressColor(progressPercentage)}` }} className="visiting__info--yellow">{visitingPersons.length}</span>/{countJoinedParticipantsByDate.length}
+                  <span style={{ color: `${checkProgressColor(progressPercentage)}` }} className="visiting__info--yellow">{visitingPersons.length}</span>/{countJoinedMembersByDate.length}
                 </span>
               </section>
               <section className="visiting__info-text visiting__percentage">

@@ -3,7 +3,7 @@ import { FormEvent, useState } from 'react';
 
 import './next-meeting-page.scss';
 import Page from '../page/page';
-import { getChoosingParticipant, getNextMeeting, getParticipants } from '../../store/selectors';
+import { getChoosingMember, getNextMeeting, getMembers } from '../../store/selectors';
 import { Link } from 'react-router-dom';
 import { formatDate } from '../../utils/utils';
 import { completeMeeting } from '../../services/api';
@@ -12,9 +12,9 @@ function NextMeetingPage(): JSX.Element {
   const dispatch = useDispatch();
   const [isActive, setActive] = useState(false)
   const [checkedUser, setCheckedUsers] = useState<{ [key: string]: boolean }>({})
-  const participants = useSelector(getParticipants)
+  const members = useSelector(getMembers)
   const nextMeeting = useSelector(getNextMeeting)
-  const choosingPerson = useSelector(getChoosingParticipant)
+  const choosingPerson = useSelector(getChoosingMember)
 
   if (!nextMeeting) return <div>No next meeting</div>;
 
@@ -59,8 +59,8 @@ function NextMeetingPage(): JSX.Element {
 
         <section className="next-meeting-block">
           <h3 className="next-meeting-block__title">Choosen By:</h3>
-          <div className="next-meeting__participant">
-            <Link to={`/participant/${choosingPerson?.id}`}>
+          <div className="next-meeting__member">
+            <Link to={`/member/${choosingPerson?.id}`}>
               {`${choosingPerson?.firstName} ${choosingPerson?.lastName}`}
             </Link>
           </div>
@@ -72,18 +72,18 @@ function NextMeetingPage(): JSX.Element {
         </section>
 
         <section className="next-meeting-block">
-          <h3 className="next-meeting-block__title">Add participants:</h3>
+          <h3 className="next-meeting-block__title">Add members:</h3>
           <div onClick={() => clickPlusHandler()} className="plus">+</div>
           {isActive && (
             <>
-              <form className="participants-form" action="">
-                {participants.map(participant => (
-                  <fieldset className="participants-form__participant" key={participant.id}>
+              <form className="members-form" action="">
+                {members.map(member => (
+                  <fieldset className="members-form__member" key={member.id}>
                     <div>
-                      <input onChange={(evt) => { checkedHandler(evt, participant.id) }} id={`${participant.id}+${participant.lastName}`} type="checkbox" />
-                      <label htmlFor={`${participant.id}+${participant.lastName}`}>{participant.firstName} {participant.lastName}</label>
+                      <input onChange={(evt) => { checkedHandler(evt, member.id) }} id={`${member.id}+${member.lastName}`} type="checkbox" />
+                      <label htmlFor={`${member.id}+${member.lastName}`}>{member.firstName} {member.lastName}</label>
                     </div>
-                    {/* {checkedUser[participant.id] && (
+                    {/* {checkedUser[member.id] && (
                     <Rating />
                   )} */}
                   </fieldset>

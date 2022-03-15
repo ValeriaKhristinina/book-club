@@ -3,28 +3,28 @@ import './form-page.scss';
 
 import Page from '../page/page';
 import NewMeetingForm from '../new-meeting-form/new-meeting-form';
-import NewParticipantForm from '../new-participant-form/new-participant-form';
+import NewMemberForm from '../new-member-form/new-member-form';
 
 function NewFormPage(): JSX.Element {
   const [isActiveMeetingForm, setActiveMeetingForm] = useState(false);
-  const [isActiveParticipantForm, setActiveParticipantForm] = useState(false);
+  const [isActivememberForm, setActivememberForm] = useState(false);
 
   const clickActiveMeetingHandler = () => {
     if (isActiveMeetingForm) {
       setActiveMeetingForm(false)
-      setActiveParticipantForm(false)
+      setActivememberForm(false)
     } else {
       setActiveMeetingForm(true)
-      setActiveParticipantForm(false)
+      setActivememberForm(false)
     }
   }
 
-  const clickActivePArticipantHandler = () => {
-    if (isActiveParticipantForm) {
-      setActiveParticipantForm(false)
+  const clickActivememberHandler = () => {
+    if (isActivememberForm) {
+      setActivememberForm(false)
       setActiveMeetingForm(false)
     } else {
-      setActiveParticipantForm(true)
+      setActivememberForm(true)
       setActiveMeetingForm(false)
     }
   }
@@ -39,12 +39,12 @@ function NewFormPage(): JSX.Element {
           <button onClick={clickActiveMeetingHandler} className={`btn ${isActiveMeetingForm ? 'visually-hidden' : ''}`}>+ Create new meeting</button>
 
         </section>
-        <section className="new-participant">
-          {isActiveParticipantForm && (
-            <NewParticipantForm />
+        <section className="new-member">
+          {isActivememberForm && (
+            <NewMemberForm />
           )
           }
-          <button onClick={clickActivePArticipantHandler} className={`btn ${isActiveParticipantForm ? 'visually-hidden' : ''}`}>+ Create new participant</button>
+          <button onClick={clickActivememberHandler} className={`btn ${isActivememberForm ? 'visually-hidden' : ''}`}>+ Create new member</button>
         </section>
       </section>
     </Page>

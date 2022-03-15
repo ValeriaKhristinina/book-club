@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import './main-page.scss';
 import Page from '../page/page';
 import { AppRoute, DEFAULT_COVER_URL } from '../../const';
-import { getParticipants, getChoosingParticipant, getCompletedMeetings, getNextMeeting } from '../../store/selectors';
+import { getMembers, getChoosingMember, getCompletedMeetings, getNextMeeting } from '../../store/selectors';
 import { checkVisitingParticipants, createNewQueque, formatDate } from '../../utils/utils';
 import CardWrapper from '../card-wrapper/card-wrapper';
 import Card from '../card/card';
@@ -13,23 +13,20 @@ import moment from 'moment';
 
 function MainPage(): JSX.Element {
 
-  const participants = useSelector(getParticipants);
+  const members = useSelector(getMembers);
   const meetings = useSelector(getCompletedMeetings);
-  const choosingPerson = useSelector(getChoosingParticipant)
+  const choosingPerson = useSelector(getChoosingMember)
   const nextMeeting = useSelector(getNextMeeting)
 
   const lastFourMeetings = meetings.slice(-4);
-  const visitingParticipants = checkVisitingParticipants(lastFourMeetings, participants);
-  const newQueque = createNewQueque(choosingPerson, participants, visitingParticipants);
+  const visitingParticipants = checkVisitingParticipants(lastFourMeetings, members);
+  const newQueque = createNewQueque(choosingPerson, members, visitingParticipants);
   const lastThreeMeetings = meetings.slice(-3).reverse()
 
   const diff = moment.duration(moment().diff(meetings[0].date));
   const bookClubAge = diff.years() + ' years ' + diff.months() + ' month'
 
   const bookCover = nextMeeting?.cover ? nextMeeting.cover.url : DEFAULT_COVER_URL
-
-  console.log(bookCover)
-
 
   return (
     <Page>
@@ -40,7 +37,7 @@ function MainPage(): JSX.Element {
               <p>{bookClubAge}</p>
             </CardWrapper>
             <CardWrapper>
-              <p>{participants.length} members</p>
+              <p>{members.length} members</p>
             </CardWrapper>
             <CardWrapper>
               <p>{meetings.length} meetings</p>
@@ -65,7 +62,7 @@ function MainPage(): JSX.Element {
 
                       <h1 className='subtitle'>
                         Choosen by:&nbsp;
-                        <Link to={`/participant/${nextMeeting.chosenById}`} className='queque-list__item'>
+                        <Link to={`/member/${nextMeeting.chosenById}`} className='queque-list__item'>
                           {`${nextMeeting.chosenByUser?.firstName} ${nextMeeting.chosenByUser?.lastName}`}
                         </Link>
                       </h1>
@@ -83,13 +80,13 @@ function MainPage(): JSX.Element {
                 <ul className="queque-list">
                   {newQueque.slice(0, 3).map(person => (
                     <li className="queque-list__item" key={person.id}>
-                      <Link to={`/participant/${person.id}`}>
+                      <Link to={`/member/${person.id}`}>
                         {person.firstName} {person.lastName}
                       </Link>
                     </li>
                   ))}
                   <li className='queque-list__item queque-list__item--show'>
-                    <Link to={AppRoute.Participants} className="link">...</Link>
+                    <Link to={AppRoute.Members} className="link">...</Link>
                   </li>
                 </ul>
               </CardWrapper>
@@ -100,7 +97,7 @@ function MainPage(): JSX.Element {
             <h1 className='title'>Last Meetings</h1>
             <section className='past__meetings cards'>
               {lastThreeMeetings.map((meeting) => (
-                <Card meeting={meeting} />
+                <Card meeting={meeting} key={meeting.id} />
               ))}
             </section>
             <Link to={AppRoute.AllMeetings} className="link">See all past meetings..</Link>

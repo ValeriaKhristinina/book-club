@@ -1,5 +1,5 @@
 import { Meeting, MeetingBase } from "../types/meeting";
-import { ParticipantBase } from "../types/participant";
+import { MemberBase } from "../types/member";
 import { getToken } from "./token";
 
 // Testing Backend
@@ -9,7 +9,7 @@ import { getToken } from "./token";
 const BACKAND_URL = 'https://x8ki-letl-twmt.n7.xano.io/api:uSSlIyia';
 
 const BACKAND_URL_MEETINGS = BACKAND_URL + '/meetings'
-const BACKAND_URL_PARTICIPANTS = BACKAND_URL + '/participants'
+const BACKAND_URL_MEMBERS = BACKAND_URL + '/members'
 const BACKAND_URL_LOGIN = BACKAND_URL + '/auth/login';
 
 function handleErrors(response: any) {
@@ -26,11 +26,11 @@ export const fetchMeetings = () =>
     .then((response) => response.json())
 
 
-export const fetchParticipants = () => fetch(BACKAND_URL_PARTICIPANTS)
+export const fetchMembers = () => fetch(BACKAND_URL_MEMBERS)
   .then(handleErrors)
   .then((response) => response.json())
 
-export const fetchParticipantById = (id: number) => fetch(`${BACKAND_URL_PARTICIPANTS}/${id}`)
+export const fetchMemberById = (id: number) => fetch(`${BACKAND_URL_MEMBERS}/${id}`)
   .then(handleErrors)
   .then((response) => response.json())
 
@@ -43,10 +43,10 @@ export const createNewMeeting = (meeting: MeetingBase) => fetch(BACKAND_URL_MEET
   .then(handleErrors)
   .then(response => response.json())
 
-export const createNewParticipant = (participant: ParticipantBase) => fetch(BACKAND_URL_PARTICIPANTS, {
+export const createNewMember = (member: MemberBase) => fetch(BACKAND_URL_MEMBERS, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(participant)
+  body: JSON.stringify(member)
 })
   .then(handleErrors)
   .then(response => response.json())

@@ -1,13 +1,13 @@
 import moment from 'moment';
 import { ProgressColor } from '../const';
 import { Meeting } from '../types/meeting';
-import { Participant } from '../types/participant';
+import { Member } from '../types/member';
 
 type VisitingStructure = {
   [key: number]: number
 }
 
-export const createPersonsArray = (persons: Participant[]): string[] => {
+export const createPersonsArray = (persons: Member[]): string[] => {
   let newArray = persons.map(item => {
     const fullName = item.firstName + " " + item.lastName;
     return fullName
@@ -15,13 +15,13 @@ export const createPersonsArray = (persons: Participant[]): string[] => {
   return newArray;
 }
 
-export const checkVisitingParticipants = (meetings: Meeting[], participants: Participant[]): VisitingStructure => {
+export const checkVisitingParticipants = (meetings: Meeting[], participants: Member[]): VisitingStructure => {
   let newObj: VisitingStructure = {}
   meetings.map((item) => {
-    if (!item.persons) {
+    if (!item.participants) {
       return false
     }
-    item.persons.map((person) => {
+    item.participants.map((person) => {
       if (!person.isVisited) {
         return false
       }
@@ -37,8 +37,8 @@ export const checkVisitingParticipants = (meetings: Meeting[], participants: Par
   return newObj;
 }
 
-export const createNewQueque = (choosingPerson: Participant | undefined, persons: Participant[], visitingParticipants: VisitingStructure): Participant[] => {
-  let newQueque: Participant[] = []
+export const createNewQueque = (choosingPerson: Member | undefined, persons: Member[], visitingParticipants: VisitingStructure): Member[] => {
+  let newQueque: Member[] = []
 
   if (!choosingPerson) {
     return []
@@ -57,10 +57,10 @@ export const createNewQueque = (choosingPerson: Participant | undefined, persons
 }
 
 export const calculateAverageRating = (lastBook: Meeting): number => {
-  if (!lastBook.persons) {
+  if (!lastBook.participants) {
     return 0
   }
-  const votingPersons = lastBook.persons.filter(rating => rating.rating !== null)
+  const votingPersons = lastBook.participants.filter(rating => rating.rating !== null)
   const result = votingPersons.reduce((sum, current) => sum + current.rating, 0);
   const averageValue = Math.round((result / votingPersons.length) * 100) / 100
   return averageValue

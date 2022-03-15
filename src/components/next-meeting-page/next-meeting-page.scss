@@ -28,7 +28,7 @@
   color: $grey-color;
 }
 
-.participants-form__participant {
+.members-form__member {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,11 +36,11 @@
   margin-bottom: 8px;
 }
 
-.participants-form__participant:last-child {
+.members-form__member:last-child {
   margin-bottom: 24px;
 }
 
-.participants-form__participant input {
+.members-form__member input {
   margin-right: 8px;
 }
 

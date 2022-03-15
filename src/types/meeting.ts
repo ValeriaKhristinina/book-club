@@ -1,5 +1,5 @@
-import { Participant } from './participant'
-type Person = {
+import { Member } from './member'
+type Participant = {
   id: number,
   rating: number,
   isVisited: boolean,
@@ -15,11 +15,11 @@ export type Meeting = {
   },
   chosenById: number,
   isComplete: boolean,
-  persons: Person[],
+  participants: Participant[],
 }
 
 export type MeetingAllInfo = Meeting & {
-  chosenByUser: Participant | undefined,
+  chosenByUser: Member | undefined,
 }
 
 
@@ -37,5 +37,5 @@ export type MeetingBase = {
   author: string,
   chosenById: number,
   isComplete: boolean,
-  persons: Person[],
+  participants: Participant[],
 }

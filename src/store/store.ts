@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import meetingReducer from './meetings';
-import participantReducer from './participants';
+import memberReducer from './members';
 import userReducer from './user';
 
 export const store = configureStore({
   reducer: {
     meetings: meetingReducer,
-    participants: participantReducer,
+    members: memberReducer,
     user: userReducer,
   },
 })

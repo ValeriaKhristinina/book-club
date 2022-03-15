@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import './app.scss';
 import { getMeetingsAsync } from '../../store/meetings';
-import { getParticipantsAsync } from '../../store/participants';
+import { getMembersAsync } from '../../store/members';
 import { AppRoute } from '../../const'
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../main-page/main-page';
@@ -12,25 +12,25 @@ import LoginPage from '../login-page/login-page';
 import FormPage from '../form-page/form-page';
 import NextMeetingPage from '../next-meeting-page/next-meeting-page';
 import MeetingsPage from '../meetings-page/meetings-page';
-import ParticipantPage from '../participant-page/participant-page';
-import ParticipantsPage from '../participants-page/participants-page';
+import MemberPage from '../member-page/member-page';
+import MembersPage from '../members-page/members-page';
 import LoadingPage from '../loading-page/loading-page';
 import ErrorPage from '../error-page/error-page';
-import { getMeetingDataLoaded, getParticipantsDataLoaded } from '../../store/selectors';
+import { getMeetingDataLoaded, getMembersDataLoaded } from '../../store/selectors';
 import { checkAuthAsync } from '../../store/user';
 
 function App(): JSX.Element {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMeetingsAsync())
-    dispatch(getParticipantsAsync())
+    dispatch(getMembersAsync())
     dispatch(checkAuthAsync())
   }, [dispatch]);
 
   const isMeetingDataLoaded = useSelector(getMeetingDataLoaded)
-  const isParticipantsDataLoaded = useSelector(getParticipantsDataLoaded)
+  const isMembersDataLoaded = useSelector(getMembersDataLoaded)
 
-  if (!isMeetingDataLoaded || !isParticipantsDataLoaded) {
+  if (!isMeetingDataLoaded || !isMembersDataLoaded) {
     return (
       <LoadingPage />
     );
@@ -46,8 +46,8 @@ function App(): JSX.Element {
         } >
         </Route>
         <Route path={AppRoute.NextMeeting} element={<NextMeetingPage />} ></Route>
-        <Route path={AppRoute.Participant} element={<ParticipantPage />} ></Route>
-        <Route path={AppRoute.Participants} element={<ParticipantsPage />} ></Route>
+        <Route path={AppRoute.Member} element={<MemberPage />} ></Route>
+        <Route path={AppRoute.Members} element={<MembersPage />} ></Route>
         <Route path={AppRoute.AllMeetings} element={<MeetingsPage />}></Route>
         <Route path={AppRoute.Login} element={<LoginPage />} ></Route>
 

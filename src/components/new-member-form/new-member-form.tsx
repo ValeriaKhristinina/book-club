@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { createNewMemberAsync } from "../../store/members";
 
-function NewmemberForm(): JSX.Element {
+function NewMemberForm(): JSX.Element {
   const dispatch = useDispatch();
 
   const [firstName, setFirstName] = useState('');
@@ -48,4 +48,4 @@ function NewmemberForm(): JSX.Element {
   )
 }
 
-export default NewmemberForm;
+export default NewMemberForm;

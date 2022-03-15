@@ -1,13 +1,13 @@
 import { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewMeetingAsync } from "../../store/meetings";
-import { getParticipants } from '../../store/selectors';
+import { getMembers } from '../../store/selectors';
 
 function NewMeetingForm(): JSX.Element {
   const [title, setTitile] = useState('');
   const [author, setAuthor] = useState('');
-  const participants = useSelector(getParticipants)
-  const [choosingParticipant, setChoosingParticipant] = useState(participants[0].id)
+  const members = useSelector(getMembers)
+  const [choosingMember, setChoosingMember] = useState(members[0].id)
   const [date, setDate] = useState('')
   const dispatch = useDispatch();
 
@@ -15,14 +15,14 @@ function NewMeetingForm(): JSX.Element {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    console.log(title, author, choosingParticipant, date)
+    console.log(title, author, choosingMember, date)
     dispatch(createNewMeetingAsync({
       date: date,
       title: title,
       author: author,
-      chosenById: Number(choosingParticipant),
+      chosenById: Number(choosingMember),
       isComplete: false,
-      persons: [],
+      participants: [],
     }))
 
     setTitile('')
@@ -42,11 +42,11 @@ function NewMeetingForm(): JSX.Element {
 
       <section className="form-block">
         <h3 className="form-block__title">Who choose:</h3>
-        <select onChange={(e) => { setChoosingParticipant(+e.target.value) }} value={choosingParticipant} name="participants" id="participants">
+        <select onChange={(e) => { setChoosingMember(+e.target.value) }} value={choosingMember} name="members" id="members">
           {
-            participants.map(participant => {
+            members.map(member => {
               return (
-                <option value={participant.id} key={participant.id}>{`${participant.firstName} ${participant.lastName}`}</option>
+                <option value={member.id} key={member.id}>{`${member.firstName} ${member.lastName}`}</option>
               )
             })
           }

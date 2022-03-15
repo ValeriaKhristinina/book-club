@@ -1,4 +1,4 @@
-export type Participant = {
+export type Member = {
   id: number,
   firstName: string,
   lastName: string,
@@ -6,7 +6,7 @@ export type Participant = {
   exitDate: string,
 }
 
-export type ParticipantBase = {
+export type MemberBase = {
   firstName: string,
   lastName: string,
   joinDate: string,
