@@ -1,6 +1,7 @@
 @import '../../variables.scss';
 
 $padding: 12px;
+$font-size: 14px;
 
 body {
   background-color: $cl-whitesmoke;
@@ -22,7 +23,7 @@ body {
 
 .card-item {
   width: 31%;
-  height: 285px;
+  height: 225px;
   padding: 0;
   margin-bottom: 56px;
 
@@ -78,6 +79,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 60%;
   padding-bottom: 12px;
   background-color: #e7e7e7;
   
@@ -108,7 +110,7 @@ body {
 .card-deco__cover {
   display: flex;
   justify-content: center;
-  width: 120px;
+  width: 100%;
   height: inherit;
   border-radius: 5%;
   img{
@@ -148,7 +150,7 @@ body {
 }
 
 .rating__average {
-  font-size: 16px;
+  font-size: $font-size;
   color: $cl-lightgrey;
 
   @include iphoneX {
@@ -157,7 +159,7 @@ body {
 }
 
 .rating__rated, .card-info__time, .visiting__info-text {
-  font-size: 16px;
+  font-size: $font-size;
   color: $cl-lightgrey;
 
   @include iphoneX {
@@ -166,7 +168,7 @@ body {
 }
 
 .rating__rated--yellow, .visiting__info--yellow {
-  font-size: 16px;
+  font-size: $font-size;
   font-weight: bold;
   color: $cl-yellow;
   

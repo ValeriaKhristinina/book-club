@@ -24,11 +24,11 @@ function Header(): JSX.Element {
       </section>
       <section className='header-login'>
         {!isAuth && (
-          <Link to={AppRoute.Login} className="header-login__link">Login</Link>
+          <Link to={AppRoute.Login} className="link">Login</Link>
         )}
 
         {isAuth && (
-          <span onClick={handleLogout} className="header-login__link">Logout</span>
+          <span onClick={handleLogout} className="link">Logout</span>
         )
 
         }

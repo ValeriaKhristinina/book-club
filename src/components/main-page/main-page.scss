@@ -43,39 +43,6 @@
   justify-content: space-between;
 }
 
-
-
-.main-content__title {
-  font-size: 32px;
-  margin-bottom: 40px;
-  color: $grey-color;
-
-  @include iphoneX {
-    font-size: 16px;
-    margin-bottom: 21px;
-  }
-}
-
-.main-content__subtitle {
-  font-size: 24px;
-  margin-bottom: 40px;
-  color: $cl-navy;
-}
-
-.link-see-all {
-  font-size: 16px;
-  color: $grey-color;
-  cursor: pointer;
-
-  @include iphoneX {
-    font-size: 14px;
-  }
-}
-
-.link-see-all:hover {
-  color: black;
-}
-
 .queque-list {
   padding-top: 24px;
   display: flex;
@@ -88,8 +55,8 @@
   opacity: 0.5;
 }
 
-.queque-list .queque-list__item:first-child {
-  font-size: 32px;
+.queque-list .queque-list__item:first-child :not(.queque-list--hidden) {
+  font-size: 28px;
 }
 
 .next-book {

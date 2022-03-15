@@ -49,7 +49,7 @@ function MainPage(): JSX.Element {
 
           <section className='main-content__block next'>
             <div className='next-block'>
-              <h1 className='main-content__title'>Next Meeting:</h1>
+              <h1 className='title'>Next Meeting:</h1>
               {nextMeeting && (
                 <CardWrapper additionalClass='next-book'>
                   <>
@@ -57,16 +57,19 @@ function MainPage(): JSX.Element {
                       <img src={bookCover} alt="book_cover" />
                     </div>
                     <div className='next-book__info'>
-                      <h1 className='main-content__subtitle'>{nextMeeting.title} <br /> by {nextMeeting.author}</h1>
-                      <h1 className='main-content__subtitle'></h1>
+                      <h1 className='subtitle'>
+                        {nextMeeting.title}
+                        <br />
+                        by {nextMeeting.author}
+                      </h1>
 
-                      <h1 className='main-content__subtitle'>
+                      <h1 className='subtitle'>
                         Choosen by:&nbsp;
                         <Link to={`/participant/${nextMeeting.chosenById}`} className='queque-list__item'>
                           {`${nextMeeting.chosenByUser?.firstName} ${nextMeeting.chosenByUser?.lastName}`}
                         </Link>
                       </h1>
-                      <p className='main-content__subtitle'>See you {formatDate(nextMeeting.date)}</p>
+                      <p className='subtitle'>See you {formatDate(nextMeeting.date)}</p>
                     </div>
 
                   </>
@@ -75,7 +78,7 @@ function MainPage(): JSX.Element {
             </div>
 
             <div className='next-block'>
-              <h1 className='main-content__title'>Next Chosing Member:</h1>
+              <h1 className='title'>Next Chosing Member:</h1>
               <CardWrapper>
                 <ul className="queque-list">
                   {newQueque.slice(0, 3).map(person => (
@@ -85,20 +88,22 @@ function MainPage(): JSX.Element {
                       </Link>
                     </li>
                   ))}
-                  <li className='queque-list__item'><Link to={AppRoute.Root}>...</Link></li>
+                  <li className='queque-list__item queque-list__item--show'>
+                    <Link to={AppRoute.Participants} className="link">...</Link>
+                  </li>
                 </ul>
               </CardWrapper>
             </div>
           </section>
 
           <section className='main-content__block past'>
-            <h1 className='main-content__title'>Last Meetings</h1>
-            <section className='past__meetings'>
+            <h1 className='title'>Last Meetings</h1>
+            <section className='past__meetings cards'>
               {lastThreeMeetings.map((meeting) => (
                 <Card meeting={meeting} />
               ))}
             </section>
-            <Link to={AppRoute.AllMeetings} className="link-see-all">See all past meetings..</Link>
+            <Link to={AppRoute.AllMeetings} className="link">See all past meetings..</Link>
           </section>
         </section>
       </section >
