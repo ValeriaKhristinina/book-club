@@ -5,7 +5,8 @@ export enum AppRoute {
   NewForm = '/new-form/',
   AllMeetings = '/meeting/all',
   Meeting = '/meeting/:id',
-  Participant = '/participant/:id'
+  Participant = '/participant/:id',
+  Participants = '/participants'
 }
 
 export enum AuthorizationStatus {

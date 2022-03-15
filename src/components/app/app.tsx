@@ -13,6 +13,7 @@ import FormPage from '../form-page/form-page';
 import NextMeetingPage from '../next-meeting-page/next-meeting-page';
 import MeetingsPage from '../meetings-page/meetings-page';
 import ParticipantPage from '../participant-page/participant-page';
+import ParticipantsPage from '../participants-page/participants-page';
 import LoadingPage from '../loading-page/loading-page';
 import ErrorPage from '../error-page/error-page';
 import { getMeetingDataLoaded, getParticipantsDataLoaded } from '../../store/selectors';
@@ -46,8 +47,10 @@ function App(): JSX.Element {
         </Route>
         <Route path={AppRoute.NextMeeting} element={<NextMeetingPage />} ></Route>
         <Route path={AppRoute.Participant} element={<ParticipantPage />} ></Route>
+        <Route path={AppRoute.Participants} element={<ParticipantsPage />} ></Route>
         <Route path={AppRoute.AllMeetings} element={<MeetingsPage />}></Route>
         <Route path={AppRoute.Login} element={<LoginPage />} ></Route>
+
         <Route path='*' element={<ErrorPage />}></Route>
       </Routes >
     </section>
