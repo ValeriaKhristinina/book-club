@@ -14,23 +14,44 @@
 
 .main-content__block {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   margin-bottom: 80px;
 }
 
 .statistic {
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .next {
   justify-content: space-between;
+
+  @include iphoneX {
+    flex-direction: column;
+  }
 }
 
 .next-block {
   flex: 1;
+  margin-bottom: 24px;
+
+  @include iphoneX {
+    margin-bottom: 42px;
+  }
 
   &:first-child {
     margin-right: 32px;
+
+    @include iphoneX {
+      margin-right: 0;
+    }
+  }
+
+  &:last-child {
+    @include iphoneX {
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -53,10 +74,18 @@
 .queque-list__item {
   margin-bottom: 10px;
   opacity: 0.5;
+
+  @include iphoneX {
+    font-size: 14px;
+  }
 }
 
 .queque-list .queque-list__item:first-child :not(.queque-list--hidden) {
   font-size: 28px;
+
+  @include iphoneX {
+    font-size: 20px;
+  }
 }
 
 .next-book {
@@ -73,9 +102,8 @@ width: inherit;
   justify-content: center;
   align-items: center;
   width: 30%;
-  height: 280px;
+  max-height: 280px;
   margin-right: 24px;
-  // background-image: url('../../../public/atomic-book.png');
 
   img {
     width: 100%;

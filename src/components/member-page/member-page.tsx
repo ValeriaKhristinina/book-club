@@ -33,7 +33,7 @@ function MemberPage(): JSX.Element {
       <section className="member-page container">
         <section className="member">
           <section className="member__avatar"></section>
-          <h2 className="member__name">{member.firstName} {member.lastName}</h2>
+          <h2 className="member__name title">{member.firstName} {member.lastName}</h2>
           <p className="member__join">Join date: {joinDate}</p>
           <p className="member__visited-count">Visited meetings: {visiredMeetings.length}</p>
           <p className="member__chose-book">Chose this books:</p>

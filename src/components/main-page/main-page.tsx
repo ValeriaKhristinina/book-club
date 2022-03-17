@@ -33,13 +33,13 @@ function MainPage(): JSX.Element {
       <section className="main-page">
         <section className="main-content container">
           <section className='main-content__block statistic'>
-            <CardWrapper>
+            <CardWrapper additionalClass='card-wrapper__statistic'>
               <p>{bookClubAge}</p>
             </CardWrapper>
-            <CardWrapper>
+            <CardWrapper additionalClass='card-wrapper__statistic'>
               <p>{members.length} members</p>
             </CardWrapper>
-            <CardWrapper>
+            <CardWrapper additionalClass='card-wrapper__statistic'>
               <p>{meetings.length} meetings</p>
             </CardWrapper>
           </section>

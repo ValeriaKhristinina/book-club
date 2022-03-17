@@ -32,7 +32,7 @@ body {
     height: 380px;
     
     margin-bottom: 24px;
-    padding-bottom: 16px;
+    // padding-bottom: 16px;
   }
 }
 
@@ -88,6 +88,8 @@ body {
   @include iphoneX {
     align-items:flex-end;
     flex-basis: 60%;
+    width: 100%;
+    padding: 0;
     border-radius: 25px 25px 0 0;
     
   }
@@ -121,8 +123,9 @@ body {
   }
 
   @include iphoneX {
-    width: 76%;
+    width: 68%;
     height: inherit;
+    padding-bottom: 10px;
   }
 }
 
