@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 
 import './main-page.scss';
 import Page from '../page/page';
-import { AppRoute, DEFAULT_COVER_URL } from '../../const';
+import { AppRoute } from '../../const';
 import { getMembers, getChoosingMember, getCompletedMeetings, getNextMeeting } from '../../store/selectors';
-import { checkVisitingParticipants, createNewQueque, formatDate } from '../../utils/utils';
+import { checkBookCover, checkVisitingParticipants, createNewQueque, formatDate } from '../../utils/utils';
 import CardWrapper from '../card-wrapper/card-wrapper';
 import Card from '../card/card';
 import moment from 'moment';
@@ -26,7 +26,7 @@ function MainPage(): JSX.Element {
   const diff = moment.duration(moment().diff(meetings[0].date));
   const bookClubAge = diff.years() + ' years ' + diff.months() + ' month'
 
-  const bookCover = nextMeeting?.cover ? nextMeeting.cover.url : DEFAULT_COVER_URL
+  const bookCover = checkBookCover(nextMeeting)
 
   return (
     <Page>
@@ -94,7 +94,7 @@ function MainPage(): JSX.Element {
           </section>
 
           <section className='main-content__block past'>
-            <h1 className='title'>Last Meetings</h1>
+            <h1 className='title'>Last Three Meetings</h1>
             <section className='past__meetings cards'>
               {lastThreeMeetings.map((meeting) => (
                 <Card meeting={meeting} key={meeting.id} />

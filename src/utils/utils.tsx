@@ -1,19 +1,20 @@
 import moment from 'moment';
-import { ProgressColor } from '../const';
-import { Meeting } from '../types/meeting';
+import { useEffect } from 'react';
+import { DEFAULT_COVER_URL, ProgressColor } from '../const';
+import { Meeting, MeetingAllInfo } from '../types/meeting';
 import { Member } from '../types/member';
 
 type VisitingStructure = {
   [key: number]: number
 }
 
-export const createPersonsArray = (persons: Member[]): string[] => {
-  let newArray = persons.map(item => {
-    const fullName = item.firstName + " " + item.lastName;
-    return fullName
-  })
-  return newArray;
-}
+// export const createPersonsArray = (persons: Member[]): string[] => {
+//   let newArray = persons.map(item => {
+//     const fullName = item.firstName + " " + item.lastName;
+//     return fullName
+//   })
+//   return newArray;
+// }
 
 export const checkVisitingParticipants = (meetings: Meeting[], participants: Member[]): VisitingStructure => {
   let newObj: VisitingStructure = {}
@@ -91,4 +92,18 @@ export const checkProgressColor = (progress: number): string => {
   } else {
     return 'invalid percentage'
   }
+}
+
+export const scrollToTop = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+}
+
+export const checkBookCover = (meeting: MeetingAllInfo | Meeting | null) => {
+  if (meeting) {
+    return meeting.cover ? meeting.cover.url : DEFAULT_COVER_URL
+  }
+
 }

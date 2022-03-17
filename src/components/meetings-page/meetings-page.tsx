@@ -6,8 +6,12 @@ import { Fragment, useState } from "react";
 import Page from "../page/page";
 import Card from '../card/card';
 import { AuthorizationStatus } from "../../const";
+import { scrollToTop } from "../../utils/utils";
 
 function MeetingsPage(): JSX.Element {
+
+  scrollToTop()
+
   const dispatch = useDispatch();
 
   const [isActiveModal, setActiveModal] = useState(false)

@@ -6,6 +6,7 @@ import { MeetingAllInfo } from '../../types/meeting';
 import Rating from '../rating/rating';
 import { getJoinedMembersByDate } from '../../store/selectors';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 type CardProps = {
   meeting: MeetingAllInfo;
@@ -50,7 +51,9 @@ function Card({ meeting }: CardProps): JSX.Element {
           </h1>
 
           <div className="card-info--wrapper">
-            <section className="card-info__chosenby">{meeting.chosenByUser?.firstName}</section>
+            <section className="card-info__chosenby">
+              <Link to={`member/${meeting.chosenById}`}>{meeting.chosenByUser?.firstName}</Link>
+            </section>
             <section className="card-info__time">{formatDate(meeting.date)}</section>
           </div>
 

@@ -21,6 +21,7 @@ import { checkAuthAsync } from '../../store/user';
 
 function App(): JSX.Element {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getMeetingsAsync())
     dispatch(getMembersAsync())

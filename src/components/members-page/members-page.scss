@@ -1,0 +1,33 @@
+@import '../../variables.scss';
+
+.members__member {
+  margin-bottom: 24px;
+  margin-right: 24px;
+  @include iphoneX {
+    // width: 100%;
+  }
+}
+
+.members-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  // align-items: center;
+
+  @include iphoneX {
+    // flex-direction: column;
+  }
+}
+
+.members__member--active {
+  background-color: $cl-navy;
+
+  .title, .subtitle {
+    color: white;
+  }
+}
+
+.members__member--fade {
+  opacity: 0.5;
+  background-color: gainsboro;
+}
