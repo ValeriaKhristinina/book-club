@@ -1,7 +1,7 @@
 import './card.scss';
 import CardWrapper from '../card-wrapper/card-wrapper';
 import { calculateAverageRating, checkProgressColor, formatDate, getRandomElement, visitingProgress } from '../../utils/utils';
-import { COLORS, DEFAULT_COVER_URL, EMOJI, RatingName } from '../../const';
+import { AppRoute, COLORS, DEFAULT_COVER_URL, EMOJI, RatingName } from '../../const';
 import { MeetingAllInfo } from '../../types/meeting';
 import Rating from '../rating/rating';
 import { getJoinedMembersByDate } from '../../store/selectors';
@@ -52,7 +52,7 @@ function Card({ meeting }: CardProps): JSX.Element {
 
           <div className="card-info--wrapper">
             <section className="card-info__chosenby">
-              <Link to={`member/${meeting.chosenById}`}>{meeting.chosenByUser?.firstName}</Link>
+              <Link to={`${AppRoute.Root}member/${meeting.chosenById}`}>{meeting.chosenByUser?.firstName}</Link>
             </section>
             <section className="card-info__time">{formatDate(meeting.date)}</section>
           </div>
