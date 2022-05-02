@@ -1,9 +1,16 @@
 import moment from "moment";
 import { Meeting, MeetingAllInfo } from "../types/meeting";
+import { Member } from "../types/member";
 import { RootState } from "./store"
 
 export const getMeetings = (state: RootState) => state.meetings.meetings;
-export const getMembers = (state: RootState) => state.members.members;
+export const getMembers = (state: RootState): Member[] => {
+  const members = state.members.members
+  return members.filter(member => member.exitDate === null)
+};
+
+export const getAllMembers = (state: RootState) => state.members.members
+
 export const getSingleMember = (state: RootState) => state.members.singleMember;
 export const getMeetingDataLoaded = (state: RootState) => state.meetings.isDataLoaded
 export const getMembersDataLoaded = (state: RootState) => state.members.isDataLoaded
