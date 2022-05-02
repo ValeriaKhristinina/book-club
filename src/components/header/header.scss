@@ -8,6 +8,10 @@
   padding: 4px 0;
   margin-bottom: 24px;
 
+  .link {
+    color: inherit;
+  }
+
   @include iphoneX {
     margin-bottom: 10px;
   }
