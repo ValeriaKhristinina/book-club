@@ -5,7 +5,7 @@ import './rating.scss';
 
 type RatingProps = {
   name: string,
-  averageValue: number
+  averageValue?: number
 }
 
 function Rating({ name, averageValue }: RatingProps): JSX.Element {
@@ -26,7 +26,7 @@ function Rating({ name, averageValue }: RatingProps): JSX.Element {
 
       {name === RatingName.ReadOnly && (
         <div className="rating__stars">
-          <div style={{ width: `${widthRating(averageValue)}%` }}></div>
+          <div style={{ width: `${widthRating(averageValue ? averageValue : 0)}%` }}></div>
         </div>
       )
       }
