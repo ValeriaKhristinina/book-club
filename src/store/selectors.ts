@@ -1,5 +1,5 @@
 import moment from "moment";
-import { MeetingAllInfo } from "../types/meeting";
+import { Meeting, MeetingAllInfo } from "../types/meeting";
 import { RootState } from "./store"
 
 export const getMeetings = (state: RootState) => state.meetings.meetings;
@@ -73,9 +73,6 @@ export const getChoosingMember = (state: RootState) => {
   return members.find((user) => user.id === memberID)
 }
 
-
-
-
 export const getCompletedMeetingsWithAllInfo = (state: RootState): MeetingAllInfo[] => {
   const meetings = getMeetingsWithAllInfo(state)
   return meetings.filter((meeting) => meeting.isComplete === true)
@@ -101,4 +98,30 @@ export const getJoinedMembersByDate = (date: string) => (state: RootState) => {
   const members = state.members.members;
   const result = members.filter(person => moment(person.joinDate).isBefore(date))
   return result
+}
+
+export const getRatedBooksByMember = (state: RootState) => {
+  const meetings = state.meetings.meetings
+  const member = getSingleMember(state)
+
+  if (member) {
+    const memberRatedBooks: Meeting[] = meetings.filter(meeting => {
+      meeting.participants.map(participant => {
+        if (participant.id === member.id) {
+          return meeting
+        }
+      })
+      return memberRatedBooks
+    })
+  }
+}
+
+
+export const getRatedBookByMember = (state: RootState) => {
+  const meetings = state.meetings.meetings;
+  const member = getSingleMember(state)
+  const memberRatedBooks = meetings.filter((book) => book.participants.find(participant => participant.id === member?.id && participant.rating))
+
+  return memberRatedBooks
+
 }
