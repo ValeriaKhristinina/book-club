@@ -11,6 +11,7 @@ import MainPage from '../main-page/main-page';
 import LoginPage from '../login-page/login-page';
 import FormPage from '../form-page/form-page';
 import NextMeetingPage from '../next-meeting-page/next-meeting-page';
+import MeetingPage from '../meeting-page/meeting-page';
 import MeetingsPage from '../meetings-page/meetings-page';
 import MemberPage from '../member-page/member-page';
 import MembersPage from '../members-page/members-page';
@@ -49,6 +50,7 @@ function App(): JSX.Element {
         <Route path={AppRoute.NextMeeting} element={<NextMeetingPage />} ></Route>
         <Route path={AppRoute.Member} element={<MemberPage />} ></Route>
         <Route path={AppRoute.Members} element={<MembersPage />} ></Route>
+        <Route path={AppRoute.Meeting} element={<MeetingPage />} ></Route>
         <Route path={AppRoute.AllMeetings} element={<MeetingsPage />}></Route>
         <Route path={AppRoute.Login} element={<LoginPage />} ></Route>
 
