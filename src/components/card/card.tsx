@@ -46,9 +46,9 @@ function Card({ meeting }: CardProps): JSX.Element {
               <span className="rating__rated--yellow">{votingPersons.length}</span>/{countJoinedMembersByDate.length}
             </section>
           </section>
-          <h1 className="card-info__title">
+          <Link to={`/meeting/${meeting.id}`} className="card-info__title">
             {meeting.title} by {meeting.author}
-          </h1>
+          </Link>
 
           <div className="card-info--wrapper">
             <section className="card-info__chosenby">
