@@ -16,11 +16,16 @@
 }
 
 .member__avatar {
+  display: flex;
+  align-items: center;
   width: 200px;
   height: 280px;
   margin-bottom: 32px;
   border-radius: 25px;
-  background-color: $grey-color;
+
+  img {
+    width: inherit;
+  }
 
   @include iphoneX {
     width: 160px;
@@ -28,14 +33,9 @@
   }
 }
 
-.member__join {
+.member__subtitle {
   font-style: italic;
   margin-bottom: 10px;
-  color: $grey-color;
-}
-
-.member__visited-count {
-  margin-bottom: 40px;
   color: $grey-color;
 }
 
@@ -73,4 +73,17 @@
 .member__book-title, .member__book-author {
   font-size: 16px;
   margin-bottom: 4px;
+}
+
+.member-books {
+  margin-bottom: 40px;
+}
+
+.rated-books-wrapper {
+  width: 60%;
+}
+
+.rated-books {
+  display: flex;
+  justify-content: space-between;
 }

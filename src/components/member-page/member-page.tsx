@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import './member-page.scss';
 import Page from '../page/page';
+import Rating from '../rating/rating';
 import { getMemberByIdAsync } from '../../store/members';
 import { checkBookCover, formatDate, scrollToTop } from '../../utils/utils';
-import { getAllMemberChoosedBook, getAllVisitedMeetings, getSingleMember } from '../../store/selectors';
+import { getAllMemberChoosedBook, getAllVisitedMeetings, getRatedBookByMember, getSingleMember } from '../../store/selectors';
 import CardWrapper from '../card-wrapper/card-wrapper';
+import { RatingName } from '../../const';
 
 function MemberPage(): JSX.Element {
   scrollToTop();
@@ -23,6 +25,9 @@ function MemberPage(): JSX.Element {
   const choosedBooks = useSelector(getAllMemberChoosedBook)
   const visiredMeetings = useSelector(getAllVisitedMeetings(Number(memberId)))
 
+  const ratedBooks = useSelector(getRatedBookByMember)
+  ratedBooks.reverse()
+
   if (!member) {
     return <div>No person</div>
   }
@@ -34,10 +39,19 @@ function MemberPage(): JSX.Element {
       <section className="member-page container">
         <CardWrapper additionalClass="member">
           <>
-            <section className="member__avatar"></section>
-            <h2 className="member__name title">{member.firstName} {member.lastName}</h2>
-            <p className="member__join">Join date: {joinDate}</p>
-            <p className="member__visited-count">Visited meetings: {visiredMeetings.length}</p>
+            <section className="member__avatar">
+              <img src='/casual-life-3d-profile-picture-of-man-in-green-shirt-and-orange-hat.png' alt="" />
+            </section>
+            <div>
+
+              <div>
+                <h2 className="member__name title">{member.firstName} {member.lastName}</h2>
+                <p className="member__subtitle">Join date: {joinDate}</p>
+                <p className="member__subtitle">Visited meetings: {visiredMeetings.length}</p>
+                <p className="member__subtitle">Rated books: {ratedBooks.length}</p>
+              </div>
+              <img src='/casual-life-3d-cat-lying-on-books.png' width={"200px"} alt="" />
+            </div>
           </>
         </CardWrapper>
 
@@ -49,8 +63,21 @@ function MemberPage(): JSX.Element {
                 <div className="member__book-avatar">
                   <img src={checkBookCover(book)} alt="" />
                 </div>
-                <div className="member__book-title">{book.title}</div>
+                <Link to={`/meeting/${book.id}`} className="member__book-title">{book.title}</Link>
                 <div className="member__book-author">{book.author}</div>
+              </section>
+            ))}
+          </section>
+        </CardWrapper>
+
+        <h1 className="title">Rated this books:</h1>
+
+        <CardWrapper>
+          <section>
+            {ratedBooks.reverse().map(book => (
+              <section className='rated-books' key={book.id}>
+                <h2 className="subtitle">{book.title} by {book.author}</h2>
+                <Rating name={RatingName.ReadOnly} averageValue={book.participants.find(participant => participant.id === member.id)?.rating} />
               </section>
             ))}
           </section>
