@@ -4,6 +4,7 @@ import { Member } from "../types/member";
 import { RootState } from "./store"
 
 export const getMeetings = (state: RootState) => state.meetings.meetings;
+export const getSingleMeeting = (state: RootState) => state.meetings.singleMeeting;
 export const getMembers = (state: RootState): Member[] => {
   const members = state.members.members
   return members.filter(member => member.exitDate === null)

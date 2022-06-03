@@ -5,6 +5,7 @@ import { Member } from "./member";
 export type MeetingsData = {
   isDataLoaded: boolean,
   meetings: Meeting[],
+  singleMeeting: Meeting | null
 }
 
 export type MembersData = {
