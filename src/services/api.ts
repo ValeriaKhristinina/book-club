@@ -25,6 +25,10 @@ export const fetchMeetings = () =>
     .then(handleErrors)
     .then((response) => response.json())
 
+export const fetchMeetingById = (id: number) => fetch(`${BACKAND_URL_MEETINGS}/${id}`)
+  .then(handleErrors)
+  .then((response) => response.json())
+
 
 export const fetchMembers = () => fetch(BACKAND_URL_MEMBERS)
   .then(handleErrors)
