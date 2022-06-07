@@ -9,7 +9,7 @@ import { getMemberByIdAsync } from '../../store/members';
 import { checkBookCover, formatDate, scrollToTop } from '../../utils/utils';
 import { getAllMemberChoosedBook, getAllVisitedMeetings, getRatedBookByMember, getSingleMember } from '../../store/selectors';
 import CardWrapper from '../card-wrapper/card-wrapper';
-import { RatingName } from '../../const';
+import { ImageUrl, RatingName } from '../../const';
 
 function MemberPage(): JSX.Element {
   scrollToTop();
@@ -40,7 +40,7 @@ function MemberPage(): JSX.Element {
         <CardWrapper additionalClass="member">
           <>
             <section className="member__avatar">
-              <img src='/casual-life-3d-profile-picture-of-man-in-green-shirt-and-orange-hat.png' alt="" />
+              <img src={ImageUrl.MemberAvatar} alt="" />
             </section>
             <div>
 
@@ -50,7 +50,7 @@ function MemberPage(): JSX.Element {
                 <p className="member__subtitle">Visited meetings: {visiredMeetings.length}</p>
                 <p className="member__subtitle">Rated books: {ratedBooks.length}</p>
               </div>
-              <img src='/casual-life-3d-cat-lying-on-books.png' width={"200px"} alt="" />
+              <img src={ImageUrl.CatOnBooks} width={"200px"} alt="" />
             </div>
           </>
         </CardWrapper>

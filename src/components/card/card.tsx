@@ -1,7 +1,7 @@
 import './card.scss';
 import CardWrapper from '../card-wrapper/card-wrapper';
 import { calculateAverageRating, checkProgressColor, formatDate, getRandomElement, visitingProgress } from '../../utils/utils';
-import { AppRoute, COLORS, DEFAULT_COVER_URL, EMOJI, RatingName } from '../../const';
+import { AppRoute, COLORS, ImageUrl, EMOJI, RatingName } from '../../const';
 import { MeetingAllInfo } from '../../types/meeting';
 import Rating from '../rating/rating';
 import { getJoinedMembersByDate } from '../../store/selectors';
@@ -19,8 +19,7 @@ function Card({ meeting }: CardProps): JSX.Element {
   const visitingPersons = meeting.participants.filter((person) => person.isVisited)
   const progressPercentage = visitingProgress(visitingPersons.length, countJoinedMembersByDate.length)
   const averageRating = calculateAverageRating(meeting)
-  const coverIrl = meeting.cover ? meeting.cover.url : DEFAULT_COVER_URL
-
+  const coverIrl = meeting.cover ? meeting.cover.url : ImageUrl.DefaultBookCover
   return (
     <CardWrapper additionalClass="card-item">
       <section className='card'>

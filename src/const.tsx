@@ -26,7 +26,17 @@ export enum ProgressColor {
   Green = '#2d9761'
 }
 
+export enum ImageUrl {
+  DefaultBookCover = '/business-3d-red-opened-book.png',
+  StackOfBooks = '/business-3d-stack-of-different-books.png',
+  MemberAvatar = '/casual-life-3d-profile-picture-of-man-in-green-shirt-and-orange-hat.png',
+  CatOnBooks = '/casual-life-3d-cat-lying-on-books.png'
+}
+
+
 export const EMOJI = ["📚", "📖", "🤎", "🤍"];
 export const COLORS = ["whitesmoke", "#b7b5b5", "lightblue", "lavender"];
 
-export const DEFAULT_COVER_URL = '/atomic-book.png'
+
+
+export const DEFAULT_COVER_URL = ImageUrl.DefaultBookCover

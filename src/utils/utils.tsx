@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { useEffect } from 'react';
-import { DEFAULT_COVER_URL, ProgressColor } from '../const';
+import { ImageUrl, ProgressColor } from '../const';
 import { Meeting, MeetingAllInfo } from '../types/meeting';
 import { Member } from '../types/member';
 
@@ -103,7 +103,7 @@ export const scrollToTop = () => {
 
 export const checkBookCover = (meeting: MeetingAllInfo | Meeting | null) => {
   if (meeting) {
-    return meeting.cover ? meeting.cover.url : DEFAULT_COVER_URL
+    return meeting.cover ? meeting.cover.url : ImageUrl.DefaultBookCover
   }
 
 }
