@@ -4,11 +4,12 @@ import { Member } from "../types/member";
 import { RootState } from "./store"
 
 export const getMeetings = (state: RootState) => state.meetings.meetings;
-export const getSingleMeeting = (state: RootState) => state.meetings.singleMeeting;
 export const getMembers = (state: RootState): Member[] => {
   const members = state.members.members
   return members.filter(member => member.exitDate === null)
 };
+
+export const getSingleMeeting = (state: RootState) => state.meetings.singleMeeting;
 
 export const getAllMembers = (state: RootState) => state.members.members
 
@@ -22,8 +23,6 @@ export const getMeetingsWithAllInfo = (state: RootState): MeetingAllInfo[] => {
 
   const meetingsWithAllInfo = meetings.map((meeting) => {
     const chosenByUser = members.find((user) => user.id === meeting.chosenById)
-
-
     const persons = meeting.participants.map((person) => {
       const personWithInfo = members.find((member) => member.id === person.id)
       return {
@@ -105,7 +104,10 @@ export const getAuthorizationStatus = (state: RootState) => state.user.authoriza
 export const getJoinedMembersByDate = (date: string) => (state: RootState) => {
   const members = state.members.members;
   const result = members.filter(person => moment(person.joinDate).isBefore(date))
-  return result
+  const exitPerson = result.filter((person) => person.exitDate && moment(person.exitDate).isBefore(date))
+  console.log(exitPerson)
+  const currentMembers = result.filter(person => !exitPerson.some(exitPerson => exitPerson.id === person.id))
+  return currentMembers
 }
 
 export const getRatedBooksByMember = (state: RootState) => {
@@ -131,5 +133,11 @@ export const getRatedBookByMember = (state: RootState) => {
   const memberRatedBooks = meetings.filter((book) => book.participants.find(participant => participant.id === member?.id && participant.rating))
 
   return memberRatedBooks
+}
+
+export const getLastVisitById = (id: number) => (state:RootState): Meeting => {
+  const visitedMeetings = getAllVisitedMeetings(id)(state)
+  const lastMeeteng = visitedMeetings[visitedMeetings.length - 1]
+  return lastMeeteng
 
 }
