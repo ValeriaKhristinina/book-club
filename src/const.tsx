@@ -26,6 +26,8 @@ export enum ProgressColor {
   Green = '#2d9761'
 }
 
+export const BOOK_CLUB_BIRTHDAY = '2020/10/5'
+
 export enum ImageUrl {
   DefaultBookCover = '/business-3d-red-opened-book.png',
   StackOfBooks = '/business-3d-stack-of-different-books.png',
@@ -33,10 +35,7 @@ export enum ImageUrl {
   CatOnBooks = '/casual-life-3d-cat-lying-on-books.png'
 }
 
-
 export const EMOJI = ["📚", "📖", "🤎", "🤍"];
 export const COLORS = ["whitesmoke", "#b7b5b5", "lightblue", "lavender"];
-
-
 
 export const DEFAULT_COVER_URL = ImageUrl.DefaultBookCover

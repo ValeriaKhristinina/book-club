@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import './main-page.scss';
 import Page from '../page/page';
-import { AppRoute } from '../../const';
+import { AppRoute, BOOK_CLUB_BIRTHDAY } from '../../const';
 import { getMembers, getChoosingMember, getCompletedMeetings, getNextMeeting } from '../../store/selectors';
 import { checkBookCover, checkVisitingParticipants, createNewQueque, formatDate } from '../../utils/utils';
 import CardWrapper from '../card-wrapper/card-wrapper';
@@ -23,7 +23,7 @@ function MainPage(): JSX.Element {
   const newQueque = createNewQueque(choosingPerson, members, visitingParticipants);
   const lastThreeMeetings = meetings.slice(-3).reverse()
 
-  const diff = moment.duration(moment().diff(meetings[0].date));
+  const diff = moment.duration(moment().diff(BOOK_CLUB_BIRTHDAY));
   const bookClubAge = diff.years() + ' years ' + diff.months() + ' month'
 
   const bookCover = checkBookCover(nextMeeting)
