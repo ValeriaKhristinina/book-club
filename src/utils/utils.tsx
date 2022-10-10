@@ -8,14 +8,6 @@ type VisitingStructure = {
   [key: number]: number
 }
 
-// export const createPersonsArray = (persons: Member[]): string[] => {
-//   let newArray = persons.map(item => {
-//     const fullName = item.firstName + " " + item.lastName;
-//     return fullName
-//   })
-//   return newArray;
-// }
-
 export const checkVisitingParticipants = (meetings: Meeting[], participants: Member[]): VisitingStructure => {
   let newObj: VisitingStructure = {}
   meetings.map((item) => {

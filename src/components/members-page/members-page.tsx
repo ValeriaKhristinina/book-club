@@ -20,7 +20,7 @@ function MembersPage(): JSX.Element {
   const visitingParticipants = checkVisitingParticipants(lastFourMeetings, members);
 
   const getLastMeeting = (id: number) => {
-    const allVisiteedMeetings = meetings.filter((item) => item.participants.find((person) => person.id === id))
+    const allVisiteedMeetings = meetings.filter((item) => item.participants.find((person) => person.id === id && person.isVisited))
     return allVisiteedMeetings[allVisiteedMeetings.length -1]
   }
 
