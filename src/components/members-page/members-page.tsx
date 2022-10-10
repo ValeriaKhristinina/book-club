@@ -19,6 +19,11 @@ function MembersPage(): JSX.Element {
   const lastFourMeetings = meetings.slice(-4);
   const visitingParticipants = checkVisitingParticipants(lastFourMeetings, members);
 
+  const getLastMeeting = (id: number) => {
+    const allVisiteedMeetings = meetings.filter((item) => item.participants.find((person) => person.id === id))
+    return allVisiteedMeetings[allVisiteedMeetings.length -1]
+  }
+
   const addedClasses = (visitingMembers: any, choosingMember: any, member: Member) => {
     if (!choosingMember) {
       return ''
@@ -27,9 +32,6 @@ function MembersPage(): JSX.Element {
     if (choosingMember.id === member.id) {
       newClasses = newClasses + 'members__member--active'
     }
-    // if (visitingMembers[member.id] < 2 || visitingMembers[member.id] === undefined) {
-    //   newClasses = newClasses + 'members__member--fade'
-    // }
     if (member.exitDate != null) {
       newClasses = `${newClasses} members__member--fade`
     }
@@ -56,6 +58,7 @@ function MembersPage(): JSX.Element {
                   {!member.exitDate && (
                     <h2 className='subtitle'>Last four months was: {visitingParticipants[member.id] ? visitingParticipants[member.id] : '0'} times</h2>
                   )}
+                  <h2 className='subtitle'>Last visited meeting: "{getLastMeeting(member.id).title}"</h2>
                 </section>
               </CardWrapper>
             </Link>

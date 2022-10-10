@@ -73,11 +73,18 @@ export const getNextMeeting = (state: RootState) => {
 }
 
 export const getChoosingMember = (state: RootState) => {
+  const meetings = state.meetings.meetings
+  const members = state.members.members;
   const nextMeeting = getNextMeeting(state)
 
-  const members = state.members.members;
-  const memberID = nextMeeting?.chosenById
-  return members.find((user) => user.id === memberID)
+  if (nextMeeting) {
+    const memberID = nextMeeting?.chosenById
+    return members.find((user) => user.id === memberID)
+  } else {
+    const lastFinishedMeeting = meetings[meetings.length - 1]
+    const memberID = lastFinishedMeeting.chosenById
+    return members.find((user) => user.id === memberID)
+  }
 }
 
 export const getCompletedMeetingsWithAllInfo = (state: RootState): MeetingAllInfo[] => {
@@ -105,7 +112,6 @@ export const getJoinedMembersByDate = (date: string) => (state: RootState) => {
   const members = state.members.members;
   const result = members.filter(person => moment(person.joinDate).isBefore(date))
   const exitPerson = result.filter((person) => person.exitDate && moment(person.exitDate).isBefore(date))
-  console.log(exitPerson)
   const currentMembers = result.filter(person => !exitPerson.some(exitPerson => exitPerson.id === person.id))
   return currentMembers
 }
@@ -133,11 +139,4 @@ export const getRatedBookByMember = (state: RootState) => {
   const memberRatedBooks = meetings.filter((book) => book.participants.find(participant => participant.id === member?.id && participant.rating))
 
   return memberRatedBooks
-}
-
-export const getLastVisitById = (id: number) => (state:RootState): Meeting => {
-  const visitedMeetings = getAllVisitedMeetings(id)(state)
-  const lastMeeteng = visitedMeetings[visitedMeetings.length - 1]
-  return lastMeeteng
-
 }
