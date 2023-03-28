@@ -20,7 +20,7 @@ function LoginPage(): JSX.Element {
       })).unwrap()
       navigate(AppRoute.Root)
     } catch (rejectedValueOrSerializedError) {
-      console.log('Please, login')
+      alert('Please, login')
     }
   }
 
