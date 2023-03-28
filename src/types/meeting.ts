@@ -1,5 +1,5 @@
 import { Member } from './member'
-type Participant = {
+export type Participant = {
   id: number,
   rating: number,
   isVisited: boolean,
