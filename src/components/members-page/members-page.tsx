@@ -3,7 +3,7 @@
 import './members-page.scss';
 import Page from '../page/page';
 import { useSelector } from 'react-redux';
-import { getChoosingMember, getCompletedMeetings, getAllMembers } from '../../store/selectors';
+import { getChoosingMember, getCompletedMeetings, getAllMembers, getLastMeeting } from '../../store/selectors';
 import CardWrapper from '../card-wrapper/card-wrapper';
 import { Link } from 'react-router-dom';
 import { checkVisitingParticipants, formatDate } from '../../utils/utils';
@@ -19,10 +19,7 @@ function MembersPage(): JSX.Element {
   const lastFourMeetings = meetings.slice(-4);
   const visitingParticipants = checkVisitingParticipants(lastFourMeetings, members);
 
-  const getLastMeeting = (id: number) => {
-    const allVisiteedMeetings = meetings.filter((item) => item.participants.find((person) => person.id === id && person.isVisited))
-    return allVisiteedMeetings[allVisiteedMeetings.length -1]
-  }
+  const getLastMeetingByID = useSelector(getLastMeeting)
 
   const addedClasses = (visitingMembers: any, choosingMember: any, member: Member) => {
     if (!choosingMember) {
@@ -58,7 +55,7 @@ function MembersPage(): JSX.Element {
                   {!member.exitDate && (
                     <h2 className='subtitle'>Last four months was: {visitingParticipants[member.id] ? visitingParticipants[member.id] : '0'} times</h2>
                   )}
-                  <h2 className='subtitle'>Last visited meeting: "{getLastMeeting(member.id).title}"</h2>
+                  <h2 className='subtitle'>Last visited meeting: "{getLastMeetingByID(member.id).title}"</h2>
                 </section>
               </CardWrapper>
             </Link>
