@@ -1,0 +1,64 @@
+@import '../../variables.scss';
+
+$round-picker: 24px;
+$animation-duration: 0.4s;
+$color-checked: $cl-navy;
+$color-non-checked: #ccc;
+
+.switch {
+  position: relative;
+  display: block;
+  width: calc($round-picker * 2.4 );
+  height: calc($round-picker * 1.3);
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $color-non-checked;
+  -webkit-transition: $animation-duration;
+  transition: $animation-duration;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: $round-picker;
+  width: $round-picker;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: $animation-duration;
+  transition: $animation-duration;
+}
+
+input:checked + .slider {
+  background-color: $color-checked;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px $color-checked;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX($round-picker);
+  -ms-transform: translateX($round-picker);
+  transform: translateX($round-picker);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
