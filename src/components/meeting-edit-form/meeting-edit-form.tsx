@@ -1,12 +1,11 @@
 import moment from 'moment';
+import dayjs from 'dayjs';
 import { Fragment, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RatingName } from '../../const';
+import { Select, Rate, DatePicker, Switch } from 'antd';
 import { getAllMembers, getJoinedMembersByDate } from '../../store/selectors';
 import { Meeting } from '../../types/meeting';
 import { Participant } from '../../types/meeting';
-import Rating from '../rating/rating';
-import Thumbler from '../thumbler/thumbler';
 
 type MeetingEditFormProps = {
   meeting: Meeting;
@@ -32,6 +31,10 @@ function MeetingEditForm({ meeting }: MeetingEditFormProps): JSX.Element {
     setParticipantsMeetings(meeting.participants);
   }, [meeting]);
 
+  const choosedMember = members.find(
+    (member) => member.id === meeting.chosenById
+  );
+
   const handleSubmit = () => {
     if (!participantsMeeting) {
       return { id: 0, rating: 0, isVisited: false };
@@ -48,7 +51,6 @@ function MeetingEditForm({ meeting }: MeetingEditFormProps): JSX.Element {
       isComplete: true,
       participants: participantsMeeting
     };
-    console.log('changedMeeting', changedMeeting);
     return changedMeeting;
   };
 
@@ -75,25 +77,29 @@ function MeetingEditForm({ meeting }: MeetingEditFormProps): JSX.Element {
 
         <fieldset>
           <label htmlFor="">Choosed by</label>
-          <select
-            onChange={(e) => setChoosedBy(Number(e.target.value))}
-            name="members"
-            defaultValue={meeting.chosenById}
-          >
-            {members.map((member) => (
-              <option value={member.id}>
-                {member.firstName} {member.lastName}
-              </option>
-            ))}
-          </select>
+          <Select
+            onChange={(value) => {
+              setChoosedBy(Number(value));
+            }}
+            style={{ width: '50%' }}
+            defaultValue={{
+              label: `${choosedMember?.firstName} ${choosedMember?.lastName}`,
+              value: choosedMember?.id
+            }}
+            options={members.map((member) => ({
+              label: `${member.firstName} ${member.lastName}`,
+              value: member.id
+            }))}
+            showArrow
+          />
         </fieldset>
 
         <fieldset>
           <label htmlFor="">Meeting date</label>
-          <input
-            onChange={(e) => setDate(e.target.value)}
-            type="date"
-            defaultValue={meeting?.date}
+          <DatePicker
+            onChange={(value) => setDate(dayjs(value).format())}
+            defaultValue={dayjs(meeting.date)}
+            allowClear={false}
           />
         </fieldset>
 
@@ -105,13 +111,17 @@ function MeetingEditForm({ meeting }: MeetingEditFormProps): JSX.Element {
             );
             return (
               <fieldset className="participant-controll-field">
-                <Thumbler
-                  booleanValue={matchParticipant !== undefined ? matchParticipant.isVisited : false}
+                <Switch
+                  defaultChecked={
+                    matchParticipant !== undefined
+                      ? matchParticipant.isVisited
+                      : false
+                  }
                 />
                 <p>
                   {currentMember.firstName} {currentMember.lastName}
                 </p>
-                <Rating name={RatingName.Controlled} defaultValue={matchParticipant?.rating}/>
+                <Rate defaultValue={matchParticipant?.rating} />
               </fieldset>
             );
           })}
