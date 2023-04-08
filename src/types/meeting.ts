@@ -1,7 +1,7 @@
 import { Member } from './member'
 export type Participant = {
   id: number,
-  rating: number,
+  rating: number | null,
   isVisited: boolean,
 }
 

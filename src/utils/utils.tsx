@@ -53,8 +53,8 @@ export const calculateAverageRating = (lastBook: Meeting): number => {
   if (!lastBook.participants) {
     return 0
   }
-  const votingPersons = lastBook.participants.filter(rating => rating.rating !== null)
-  const result = votingPersons.reduce((sum, current) => sum + current.rating, 0);
+  const votingPersons = lastBook.participants.filter(participant => participant.rating !== null)
+  const result = votingPersons.reduce((sum, current) => sum + (current.rating || 0), 0);
   const averageValue = Math.round((result / votingPersons.length) * 100) / 100
   return averageValue
 }
