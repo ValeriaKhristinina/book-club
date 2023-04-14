@@ -1,7 +1,7 @@
 import './card.scss';
 import CardWrapper from '../card-wrapper/card-wrapper';
 import { calculateAverageRating, checkProgressColor, formatDate, getRandomElement, visitingProgress } from '../../utils/utils';
-import { AppRoute, COLORS, ImageUrl, EMOJI, RatingName } from '../../const';
+import { AppRoute, COLORS, ImageUrl, EMOJI } from '../../const';
 import { MeetingAllInfo } from '../../types/meeting';
 import Rating from '../rating/rating';
 import { getJoinedMembersByDate } from '../../store/selectors';
@@ -37,7 +37,7 @@ function Card({ meeting }: CardProps): JSX.Element {
         <section className="card-info card__container">
           <section className="card-info__rating rating">
             <div className="rating__wrapper">
-              <Rating name={RatingName.ReadOnly} averageValue={averageRating} />
+              <Rating averageValue={averageRating} />
               <section className="rating__average">({!Number.isNaN(averageRating) ? averageRating : '0'})</section>
             </div>
 

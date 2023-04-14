@@ -15,11 +15,6 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export enum RatingName {
-  Controlled = 'CONTROLLED',
-  ReadOnly = 'READ_ONLY'
-}
-
 export enum ProgressColor {
   Red = '#e55039',
   Yellow = '#f9b300',
