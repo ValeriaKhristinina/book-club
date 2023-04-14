@@ -1,17 +1,19 @@
-import moment from 'moment';
 import dayjs from 'dayjs';
 import { Fragment, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Select, Rate, DatePicker, Switch } from 'antd';
-import { getAllMembers, getJoinedMembersByDate } from '../../store/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { Select, DatePicker, Switch, Rate } from 'antd';
+import { getAllMembers, getAllMembersByDate } from '../../store/selectors';
 import { Meeting } from '../../types/meeting';
 import { Participant } from '../../types/meeting';
+import { Member } from '../../types/member';
+import { changeMeetingAsync } from '../../store/meetings';
 
 type MeetingEditFormProps = {
   meeting: Meeting;
 };
 
 function MeetingEditForm({ meeting }: MeetingEditFormProps): JSX.Element {
+  const dispatch = useDispatch();
   const [bookName, setBookName] = useState('');
   const [author, setAuthor] = useState('');
   const [date, setDate] = useState('');
@@ -19,9 +21,10 @@ function MeetingEditForm({ meeting }: MeetingEditFormProps): JSX.Element {
   const [participantsMeeting, setParticipantsMeetings] =
     useState<Participant[]>();
 
-  const now = `${moment()}`;
   const members = useSelector(getAllMembers);
-  const currentMembers = useSelector(getJoinedMembersByDate(now));
+  const membersByTime = useSelector(getAllMembersByDate(meeting.date));
+
+  console.log('membersByTime', membersByTime);
 
   useEffect(() => {
     setBookName(meeting.title);
@@ -35,23 +38,67 @@ function MeetingEditForm({ meeting }: MeetingEditFormProps): JSX.Element {
     (member) => member.id === meeting.chosenById
   );
 
+  const handlerChangeVisiting = (event: any, currentMember: Member) => {
+    let memberInMeeting = false;
+    const cloneParticipants = participantsMeeting?.map((participant) => {
+      if (participant.id === currentMember.id) {
+        memberInMeeting = true;
+        return {
+          ...participant,
+          isVisited: event
+        };
+      }
+      return participant;
+    });
+    if (!memberInMeeting) {
+      const newParticipant: Participant = {
+        id: currentMember.id,
+        rating: null,
+        isVisited: event
+      };
+      cloneParticipants?.push(newParticipant);
+    }
+    setParticipantsMeetings(cloneParticipants);
+  };
+  const handlerChangeRating = (event: any, currentMember: Member) => {
+    let memberInMeeting = false;
+    const cloneParticipants = participantsMeeting?.map((participant) => {
+      if (participant.id === currentMember.id) {
+        memberInMeeting = true;
+        return {
+          ...participant,
+          rating: event
+        };
+      }
+      return participant;
+    });
+    if (!memberInMeeting) {
+      const newParticipant: Participant = {
+        id: currentMember.id,
+        rating: event,
+        isVisited: false
+      };
+      cloneParticipants?.push(newParticipant);
+    }
+
+    setParticipantsMeetings(cloneParticipants);
+  };
+
   const handleSubmit = () => {
     if (!participantsMeeting) {
       return { id: 0, rating: 0, isVisited: false };
     }
     const changedMeeting: Meeting = {
+      ...meeting,
       id: meeting.id,
       date: date,
       title: bookName,
       author: author,
-      cover: {
-        url: ''
-      },
       chosenById: choosedBy,
-      isComplete: true,
       participants: participantsMeeting
     };
-    return changedMeeting;
+    console.log(changedMeeting);
+    dispatch(changeMeetingAsync(changedMeeting));
   };
 
   return (
@@ -97,7 +144,7 @@ function MeetingEditForm({ meeting }: MeetingEditFormProps): JSX.Element {
         <fieldset>
           <label htmlFor="">Meeting date</label>
           <DatePicker
-            onChange={(value) => setDate(dayjs(value).format())}
+            onChange={(value) => setDate(dayjs(value).format('YYYY-MM-DD'))}
             defaultValue={dayjs(meeting.date)}
             allowClear={false}
           />
@@ -105,13 +152,17 @@ function MeetingEditForm({ meeting }: MeetingEditFormProps): JSX.Element {
 
         <fieldset>
           <label htmlFor="">Participants and rating</label>
-          {currentMembers.map((currentMember) => {
+          {membersByTime.map((currentMember) => {
             const matchParticipant = meeting.participants.find(
               (participant) => participant.id === currentMember.id
             );
             return (
-              <fieldset className="participant-controll-field">
+              <fieldset
+                key={currentMember.id}
+                className="participant-controll-field"
+              >
                 <Switch
+                  onClick={(e) => handlerChangeVisiting(e, currentMember)}
                   defaultChecked={
                     matchParticipant !== undefined
                       ? matchParticipant.isVisited
@@ -121,14 +172,17 @@ function MeetingEditForm({ meeting }: MeetingEditFormProps): JSX.Element {
                 <p>
                   {currentMember.firstName} {currentMember.lastName}
                 </p>
-                <Rate defaultValue={matchParticipant?.rating} />
+                <Rate
+                  onChange={(e) => handlerChangeRating(e, currentMember)}
+                  defaultValue={matchParticipant?.rating || 0}
+                />
               </fieldset>
             );
           })}
         </fieldset>
       </form>
       <button onClick={handleSubmit} type="submit">
-        Submit
+        Save
       </button>
     </Fragment>
   );
