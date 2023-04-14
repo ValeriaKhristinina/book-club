@@ -115,6 +115,12 @@ export const getJoinedMembersByDate = (date: string) => (state: RootState) => {
   return currentMembers
 }
 
+export const getAllMembersByDate = (date: string) => (state: RootState) => {
+  const members = getAllMembers(state)
+  const result = members.filter(person => moment(person.joinDate).isBefore(date))
+  return result
+}
+
 export const getRatedBooksByMember = (state: RootState) => {
   const meetings = getMeetings(state)
   const member = getSingleMember(state)
